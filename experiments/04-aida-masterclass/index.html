@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith Wellness | The AIDA Masterclass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cp-bg': '#FDFCFB',
+                        'cp-stone': '#1C1917',
+                        'cp-muted': '#71717A',
+                        'cp-sage': '#E5EADD',
+                        'cp-beige': '#F5F5F4',
+                    },
+                    fontFamily: {
+                        serif: ['Instrument Serif', 'serif'],
+                        sans: ['Instrument Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #FDFCFB;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .section-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bg-grid {
+            background-image: radial-gradient(#1C1917 0.5px, transparent 0.5px);
+            background-size: 32px 32px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F5F5F4;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1C1917;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-cp-stone scroll-smooth">
+
+    <!-- [NAV] -->
+    <nav class="fixed top-0 w-full z-50 border-b border-stone-100 bg-white/60 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="font-serif italic text-2xl tracking-tight">Zenith</span>
+            <div class="hidden md:flex gap-10 text-sm font-medium">
+                <a href="#problem" class="hover:opacity-50 transition-all">Approach</a>
+                <a href="#process" class="hover:opacity-50 transition-all">Method</a>
+                <a href="#faqs" class="hover:opacity-50 transition-all">Insights</a>
+            </div>
+            <button
+                class="bg-cp-stone text-white px-6 py-2.5 rounded-full text-sm font-medium hover:scale-105 active:scale-95 transition-all">
+                Book Consultation
+            </button>
+        </div>
+    </nav>
+
+    <!-- [A] ATTENTION: THE HERO -->
+    <header class="pt-40 pb-20 px-6 min-h-[90vh] flex flex-col items-center text-center">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <div class="space-y-4">
+                <span class="inline-block text-xs font-bold uppercase tracking-[0.3em] text-cp-muted">Founded on clarity
+                    — 2026</span>
+                <h1 class="font-serif text-6xl md:text-[110px] leading-[0.9] tracking-[-0.03em]">
+                    Find your path to <br> <span class="italic font-normal text-stone-400">gentle resilience.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-cp-muted max-w-2xl mx-auto leading-normal">
+                    Therapeutic coaching designed for those navigating the complexities of modern success with intention
+                    and grace.
+                </p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#action"
+                    class="bg-cp-stone text-white px-10 py-5 rounded-full text-lg font-medium shadow-xl hover:-translate-y-1 transition-all">Start
+                    Your Journey</a>
+                <a href="#process"
+                    class="px-10 py-5 border border-stone-200 rounded-full text-lg font-medium hover:bg-stone-50 transition-all">How
+                    it works</a>
+            </div>
+        </div>
+
+        <!-- Hero Visual -->
+        <div class="mt-20 w-full max-w-7xl mx-auto aspect-[16/7] rounded-[40px] overflow-hidden shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1499728603263-13726abce5fd?auto=format&fit=crop&q=80&w=2000"
+                class="w-full h-full object-cover">
+        </div>
+    </header>
+
+    <!-- [I] INTEREST: THE EMPATHY (STORYTELLING) -->
+    <section id="problem" class="py-32 bg-cp-beige bg-grid opacity-20">
+        <!-- Overlay logic to make grid subtle -->
+    </section>
+    <section class="py-32 -mt-[384px] relative z-10 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <div class="space-y-8">
+                <h2 class="font-serif text-5xl md:text-6xl leading-[1.1]">Success shouldn't <br> cost you your <span
+                        class="italic font-normal">peace.</span></h2>
+            </div>
+            <div class="space-y-10">
+                <p class="text-2xl text-stone-600 leading-relaxed italic border-l-4 border-cp-sage pl-8">
+                    "Often we find ourselves at the top, only to realize we've forgotten how it feels to breathe
+                    underneath the weight of expectation."
+                </p>
+                <div class="space-y-6 text-lg text-cp-muted leading-relaxed">
+                    <p>In a world optimized for speed, we've lost the rhythm of restoration. Clearpath was built as a
+                        sanctuary for those who have mastered the 'what' of life but are still searching for the 'why'.
+                    </p>
+                    <p>We don't just solve problems; we help you reconstruct your internal landscape so you can lead,
+                        live, and love from a place of overflow—not exhaustion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [I] INTEREST: THE MODALITIES (DETAILS) -->
+    <section class="py-32 px-6 border-y border-stone-100">
+        <div class="max-w-7xl mx-auto flex flex-col gap-20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 bg-cp-sage rounded-full flex items-center justify-center"><i
+                            data-lucide="compass"></i></div>
+                    <h3 class="text-xl font-bold">Deep Alignment</h3>
+                    <p class="text-cp-muted">Identifying the core values that truly drive you, stripping away the noise
+                        of societal expectations.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="w-12 h-12 bg-cp-sage rounded-full flex items-center justify-center"><i
+                            data-lucide="wind"></i></div>
+                    <h3 class="text-xl font-bold">Somatic Release</h3>
+                    <p class="text-cp-muted">Integrating body-based practices to release the stored stress that talk
+                        therapy alone cannot reach.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="w-12 h-12 bg-cp-sage rounded-full flex items-center justify-center"><i
+                            data-lucide="shield-check"></i></div>
+                    <h3 class="text-xl font-bold">Resilient Boundaries</h3>
+                    <p class="text-cp-muted">Constructing sustainable ways to interact with the world without losing
+                        your sense of self.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [D] DESIRE: THE PROCESS (CLARITY OF PATH) -->
+    <section id="process" class="py-32 px-6 bg-cp-stone text-white rounded-[60px] mx-4 my-10 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32">
+            <div class="space-y-10">
+                <div class="space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-widest opacity-50">The Journey</span>
+                    <h2 class="font-serif text-5xl md:text-7xl leading-tight italic">From chaos to <br> curated calm.
+                    </h2>
+                </div>
+                <div class="aspect-square rounded-[40px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ae6ce6ea858?auto=format&fit=crop&q=80&w=800"
+                        class="w-full h-full object-cover grayscale opacity-50">
+                </div>
+            </div>
+            <div class="flex flex-col justify-center space-y-20">
+                <!-- Step 1 -->
+                <div class="flex gap-8 group">
+                    <span
+                        class="text-4xl font-serif italic opacity-20 group-hover:opacity-100 transition-opacity">01</span>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-bold">The Discovery Session</h4>
+                        <p class="text-lg opacity-60">A 90-minute immersion to map your current state and identify the
+                            hidden friction points in your life.</p>
+                    </div>
+                </div>
+                <!-- Step 2 -->
+                <div class="flex gap-8 group">
+                    <span
+                        class="text-4xl font-serif italic opacity-20 group-hover:opacity-100 transition-opacity">02</span>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-bold">Iterative Coaching</h4>
+                        <p class="text-lg opacity-60">Bi-weekly sessions focused on real-time application of resilience
+                            techniques and strategic realignment.</p>
+                    </div>
+                </div>
+                <!-- Step 3 -->
+                <div class="flex gap-8 group">
+                    <span
+                        class="text-4xl font-serif italic opacity-20 group-hover:opacity-100 transition-opacity">03</span>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-bold">Sustained Integration</h4>
+                        <p class="text-lg opacity-60">We don't leave you after the 'breakthrough'. We ensure the new
+                            habits are anchored into your daily architecture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [D] DESIRE: TRUST & PROOF -->
+    <section class="py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center space-y-12">
+            <div class="space-y-4">
+                <i data-lucide="quote" class="mx-auto opacity-10" size="64"></i>
+                <h2 class="font-serif text-4xl italic text-stone-600 leading-snug">
+                    "I used to lead from a place of fear—fear of failing, fear of being 'found out'. ZENITH transformed
+                    that energy into a quiet, unstoppable confidence."
+                </h2>
+            </div>
+            <div class="flex flex-col items-center gap-4">
+                <img src="https://i.pravatar.cc/80?u=9" class="w-20 h-20 rounded-full grayscale">
+                <div class="flex flex-col">
+                    <span class="font-bold text-sm tracking-widest uppercase">Marcus Thorne</span>
+                    <span class="text-xs text-cp-muted">Managing Partner, Thorne & Assoc.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [FRICTION REDUCTION] FAQ (Don't Make Me Think) -->
+    <section id="faqs" class="py-32 px-6 bg-cp-beige">
+        <div class="max-w-4xl mx-auto space-y-16">
+            <h2 class="font-serif text-4xl text-center">Your questions, addressed.</h2>
+            <div class="space-y-6">
+                <div class="bg-white p-8 rounded-3xl border border-stone-100 space-y-4">
+                    <h4 class="font-bold text-lg flex justify-between items-center group cursor-pointer">
+                        Is this just another life coaching program?
+                        <i data-lucide="plus" size="18" class="opacity-30"></i>
+                    </h4>
+                    <p class="text-cp-muted leading-relaxed">No. We combine clinical psychology principles with
+                        executive performance metrics and somatic therapy. It’s evidence-based, results-driven, and
+                        deeply personal.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl border border-stone-100 space-y-4">
+                    <h4 class="font-bold text-lg flex justify-between items-center group cursor-pointer">
+                        How long does a typical engagement last?
+                        <i data-lucide="plus" size="18" class="opacity-30"></i>
+                    </h4>
+                    <p class="text-cp-muted leading-relaxed">Transformation takes time. Most clients commit to a minimum
+                        6-month container to see genuine, lasting structural change in their lives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [A] ACTION: THE CLOSE -->
+    <section id="action" class="py-40 px-6 text-center">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <h2 class="font-serif text-6xl md:text-8xl leading-none">Ready to reclaim <br> <span
+                    class="italic font-normal">your clarity?</span></h2>
+            <p class="text-xl text-cp-muted max-w-xl mx-auto">Openings for the 2026 Winter Cohort are limited to 12
+                individuals. Secure your discovery session today.</p>
+            <div class="pt-8">
+                <button
+                    class="bg-cp-stone text-white px-12 py-6 rounded-full text-xl font-bold shadow-2xl hover:bg-stone-800 hover:scale-105 transition-all">Apply
+                    for Consultation</button>
+                <p class="mt-6 text-sm text-cp-muted">No commitment required. Strictly confidential.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-20 px-6 border-t border-stone-100">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-20">
+            <div class="space-y-6">
+                <span class="font-serif italic text-3xl">Zenith</span>
+                <p class="text-cp-muted max-w-xs">A sanctuary for the mind. Serving the global community of leaders
+                    since 2012.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-16 md:gap-32">
+                <div class="space-y-6">
+                    <span class="text-xs font-bold uppercase tracking-widest opacity-40">Practice</span>
+                    <nav class="flex flex-col gap-4 text-sm font-medium">
+                        <a href="#" class="hover:opacity-50">Approach</a>
+                        <a href="#" class="hover:opacity-50">Journal</a>
+                        <a href="#" class="hover:opacity-50">About</a>
+                    </nav>
+                </div>
+                <div class="space-y-6">
+                    <span class="text-xs font-bold uppercase tracking-widest opacity-40">Connect</span>
+                    <nav class="flex flex-col gap-4 text-sm font-medium">
+                        <a href="#" class="hover:opacity-50">Instagram</a>
+                        <a href="#" class="hover:opacity-50">LinkedIn</a>
+                        <a href="#" class="hover:opacity-50">Email</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto mt-20 pt-8 border-t border-stone-100 flex flex-col md:flex-row justify-between gap-6 opacity-30 text-xs font-bold uppercase tracking-widest">
+            <span>© 2026 ZENITH WELLNESS STUDIO.</span>
+            <span>Based in Copenhagen & Palo Alto.</span>
+        </div>
+    </footer>
+
+    <a href="../../index.html"
+        class="fixed bottom-6 left-6 bg-white border border-stone-200 text-cp-stone px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl z-50 hover:bg-stone-50 transition-all">
+        <i data-lucide="arrow-left" size="16"></i> Lab Launcher
+    </a>
+
+    <script>
+        lucide.createIcons();
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.section-fade').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight * 0.8) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

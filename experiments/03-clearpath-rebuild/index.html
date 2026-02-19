@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clearpath - Find Your Balance</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cp-bg': '#FDFCFB',
+                        'cp-stone': '#1C1917',
+                        'cp-muted': '#71717A',
+                        'cp-sage': '#E5EADD',
+                        'cp-beige': '#F5F5F4',
+                    },
+                    fontFamily: {
+                        serif: ['Instrument Serif', 'serif'],
+                        sans: ['Instrument Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #FDFCFB;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .soft-shadow {
+            box-shadow: 0 40px 100px -20px rgba(28, 25, 23, 0.05);
+        }
+
+        .fade-in {
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-cp-stone selection:bg-cp-sage selection:text-cp-stone">
+
+    <!-- NAVIGATION: Minimal & Elegant -->
+    <nav class="fixed top-0 left-0 w-full z-50 px-6 py-6 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="font-serif italic text-[28px] tracking-tight">Clearpath</span>
+            </div>
+
+            <div
+                class="hidden md:flex items-center bg-cp-beige/80 backdrop-blur-md px-8 py-3 rounded-full border border-stone-100 gap-10">
+                <a href="#" class="text-[14px] font-medium hover:opacity-50 transition-all">Approach</a>
+                <a href="#" class="text-[14px] font-medium hover:opacity-50 transition-all">Journal</a>
+                <a href="#" class="text-[14px] font-medium hover:opacity-50 transition-all">About</a>
+                <a href="#" class="text-[14px] font-medium hover:opacity-50 transition-all">Sessions</a>
+            </div>
+
+            <button
+                class="bg-cp-stone text-white px-6 py-3 rounded-full text-[14px] font-medium hover:scale-105 active:scale-95 transition-all">
+                Book a consultation
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO: Centered, Sophisticated, High Whitespace -->
+    <section class="pt-48 pb-32 px-6 fade-in">
+        <div class="max-w-4xl mx-auto text-center flex flex-col items-center gap-10">
+            <div class="flex flex-col gap-6">
+                <span class="text-[14px] font-medium uppercase tracking-[0.2em] text-cp-muted">A space for
+                    clarity</span>
+                <h1 class="font-serif text-[64px] md:text-[92px] leading-[0.95] tracking-[-0.03em]">
+                    Find the path to <br>
+                    <span class="italic font-normal">gentle well-being.</span>
+                </h1>
+                <p class="text-[18px] md:text-[22px] text-cp-muted max-w-2xl mx-auto leading-relaxed">
+                    Guided therapy and life coaching designed to help you navigate life's complexities with grace,
+                    intention, and renewed perspective.
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center gap-4">
+                <button
+                    class="bg-cp-stone text-white px-10 py-5 rounded-full text-[16px] font-medium hover:bg-stone-800 transition-all">
+                    Start your journey
+                </button>
+                <div class="flex items-center gap-3 px-6 py-5 cursor-pointer hover:opacity-60 transition-all">
+                    <span class="text-[16px] font-medium">Explore approach</span>
+                    <i data-lucide="arrow-right" size="18"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LARGE VISUAL: Soft Organic Shapes -->
+    <section class="max-w-7xl mx-auto px-6 pb-32 fade-in" style="animation-delay: 0.2s;">
+        <div class="relative w-full aspect-[21/9] rounded-[48px] overflow-hidden soft-shadow">
+            <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=2000"
+                alt="Serene Nature" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-stone-900/10"></div>
+
+            <!-- Float label -->
+            <div
+                class="absolute bottom-10 left-10 bg-white/40 backdrop-blur-lg border border-white/20 px-6 py-4 rounded-3xl flex items-center gap-4">
+                <div class="w-2 h-2 bg-white rounded-full"></div>
+                <span class="text-white text-[14px] font-medium uppercase tracking-widest">Est. 2012</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENT GRID: Soft Layout -->
+    <section class="py-32 bg-cp-beige">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col gap-24">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                <div class="flex flex-col gap-8">
+                    <h2 class="font-serif text-[48px] md:text-[56px] leading-tight">Supporting you in <br> every season.
+                    </h2>
+                    <p class="text-[18px] text-cp-muted leading-relaxed">
+                        Whether you're navigating a major transition or simply seeking more peace in your daily life,
+                        our sessions offer a safe container for growth and discovery.
+                    </p>
+                    <ul class="flex flex-col gap-4">
+                        <li class="flex items-center gap-4">
+                            <i data-lucide="check" size="20" class="text-cp-stone"></i>
+                            <span class="text-[16px] font-medium">Anxiety & Stress Management</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i data-lucide="check" size="20" class="text-cp-stone"></i>
+                            <span class="text-[16px] font-medium">Relationship & Boundary Work</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i data-lucide="check" size="20" class="text-cp-stone"></i>
+                            <span class="text-[16px] font-medium">Career Alignment Coaching</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="aspect-[3/4] rounded-[32px] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ae6ce6ea858?auto=format&fit=crop&q=80&w=600"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-[3/4] rounded-[32px] overflow-hidden mt-12">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600"
+                            class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL: Minimal Serif -->
+    <section class="py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center flex flex-col gap-8">
+            <i data-lucide="quote" class="mx-auto opacity-20" size="40"></i>
+            <blockquote class="font-serif text-[32px] md:text-[42px] leading-snug italic text-stone-600">
+                "Working with Clearpath didn't just help me solve my problems—it helped me understand myself on a level
+                I never thought possible. Truly life-changing."
+            </blockquote>
+            <div class="flex flex-col gap-1">
+                <span class="font-bold text-[14px] uppercase tracking-widest">Sarah Jenkins</span>
+                <span class="text-cp-muted text-[14px]">Creative Director</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-20 px-6 border-t border-stone-100">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="flex flex-col gap-4">
+                <span class="font-serif italic text-[24px]">Clearpath</span>
+                <p class="text-[14px] text-cp-muted max-w-xs">Helping you find clarity in a complex world since 2012.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-20">
+                <div class="flex flex-col gap-4">
+                    <span class="text-[12px] font-bold uppercase tracking-widest opacity-40">Practice</span>
+                    <a href="#" class="text-[14px] hover:opacity-50 transition-all">Approach</a>
+                    <a href="#" class="text-[14px] hover:opacity-50 transition-all">Journal</a>
+                    <a href="#" class="text-[14px] hover:opacity-50 transition-all">About</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <span class="text-[12px] font-bold uppercase tracking-widest opacity-40">Support</span>
+                    <a href="#" class="text-[14px] hover:opacity-50 transition-all">Contact</a>
+                    <a href="#" class="text-[14px] hover:opacity-50 transition-all">Book Online</a>
+                    <a href="#" class="text-[14px] hover:opacity-50 transition-all">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="../../index.html"
+        class="fixed bottom-6 right-6 bg-stone-900 text-white px-6 py-3 rounded-full text-[14px] font-medium flex items-center gap-2 shadow-2xl z-50 hover:scale-105 transition-all">
+        <i data-lucide="arrow-left" size="16"></i> Lab Launcher
+    </a>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

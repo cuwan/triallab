@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clearpath - Find Your Clarity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cp-primary': '#1A1A1A',
+                        'cp-muted': '#71717A',
+                        'cp-sage': '#E5EADD',
+                        'cp-cream': '#FDFCFB',
+                        'cp-border': '#EFEFEF',
+                    },
+                    fontFamily: {
+                        serif: ['Instrument Serif', 'serif'],
+                        sans: ['Instrument Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #FDFCFB;
+            color: #1A1A1A;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-medium;
+            transition: opacity 0.2s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.5;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .card-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+
+    <!-- [NAVBAR] - Clear & Connected -->
+    <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-cp-border">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="font-serif italic text-2xl">Clearpath</a>
+            <div class="hidden md:flex gap-10">
+                <a href="#validation" class="nav-link">The Problem</a>
+                <a href="#benefits" class="nav-link">Benefits</a>
+                <a href="#process" class="nav-link">Our Method</a>
+                <a href="#testimonials" class="nav-link">Reviews</a>
+            </div>
+            <a href="#booking"
+                class="bg-cp-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-all">
+                Get Started
+            </a>
+        </div>
+    </nav>
+
+    <!-- [HERO] - Attention & Immediate Answer -->
+    <section class="pt-40 pb-24 px-6">
+        <div class="max-w-5xl mx-auto text-center space-y-10">
+            <h1 class="font-serif text-[64px] md:text-[96px] leading-[0.9] tracking-tight">
+                Quiet your mind, <br>
+                <span class="italic font-normal text-cp-muted">regain your life.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-cp-muted max-w-2xl mx-auto font-medium">
+                Kami membantu individu yang kewalahan menghadapi kecemasan dan burnout untuk menemukan ketenangan
+                melalui metode terapi berbasis bukti.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
+                <a href="#booking"
+                    class="bg-cp-primary text-white px-10 py-5 rounded-full text-lg font-bold shadow-xl hover:-translate-y-1 transition-all">Start
+                    Your Recovery</a>
+                <a href="#process"
+                    class="px-10 py-5 border border-stone-200 rounded-full text-lg font-bold hover:bg-stone-50 transition-all">Learn
+                    How it Works</a>
+            </div>
+            <div class="pt-10 flex items-center justify-center gap-4 opacity-50">
+                <span class="text-xs font-bold uppercase tracking-widest">Licensed Professionals</span>
+                <span class="w-1 h-1 bg-cp-primary rounded-full"></span>
+                <span class="text-xs font-bold uppercase tracking-widest">Confidential Sessions</span>
+                <span class="w-1 h-1 bg-cp-primary rounded-full"></span>
+                <span class="text-xs font-bold uppercase tracking-widest">Insurance Accepted</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- [VALIDATION / THE PROBLEM] - Connect & Empathize -->
+    <section id="validation" class="py-32 bg-cp-sage/30 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
+            <div class="space-y-6">
+                <h2 class="font-serif text-[48px] md:text-[64px] leading-tight">Apakah ini terdengar seperti Anda?</h2>
+                <div class="h-1 w-20 bg-cp-primary"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-[32px] border border-stone-100 space-y-4">
+                    <i data-lucide="cloud-rain" size="32" class="text-blue-500"></i>
+                    <h3 class="text-xl font-bold">Kecemasan Berlebih</h3>
+                    <p class="text-cp-muted text-sm leading-relaxed">Pikiran yang tidak bisa berhenti di malam hari,
+                        membuat Anda merasa lelah sepanjang waktu.</p>
+                </div>
+                <div class="bg-white p-8 rounded-[32px] border border-stone-100 space-y-4">
+                    <i data-lucide="battery-low" size="32" class="text-red-400"></i>
+                    <h3 class="text-xl font-bold">Burnout Berat</h3>
+                    <p class="text-cp-muted text-sm leading-relaxed">Anda telah kehilangan minat pada hal-hal yang dulu
+                        Anda cintai dan merasa hampa.</p>
+                </div>
+                <div class="bg-white p-8 rounded-[32px] border border-stone-100 space-y-4">
+                    <i data-lucide="git-fork" size="32" class="text-orange-400"></i>
+                    <h3 class="text-xl font-bold">Lost Direction</h3>
+                    <p class="text-cp-muted text-sm leading-relaxed">Merasa terasing dari diri sendiri dan tidak tahu
+                        langkah apa yang harus diambil selanjutnya.</p>
+                </div>
+                <div class="bg-white p-8 rounded-[32px] border border-stone-100 space-y-4">
+                    <i data-lucide="users" size="32" class="text-cp-muted"></i>
+                    <h3 class="text-xl font-bold">Social Anxiety</h3>
+                    <p class="text-cp-muted text-sm leading-relaxed">Ketakutan akan penilaian orang lain yang membatasi
+                        potensi hidup Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [BENEFITS] - The Transformation -->
+    <section id="benefits" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto space-y-20">
+            <div class="max-w-3xl space-y-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-cp-muted">Real Transformation</span>
+                <h2 class="font-serif text-[48px] md:text-[64px] leading-tight italic">Hasil yang bisa Anda rasakan.
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="space-y-6">
+                    <div class="aspect-[4/5] rounded-[40px] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-xl font-bold">Ketenangan Emosional</h4>
+                        <p class="text-cp-muted">Belajar cara mengelola emosi tanpa harus merasa kewalahan olehnya.</p>
+                    </div>
+                </div>
+                <div class="space-y-6 pt-12 md:pt-24">
+                    <div class="aspect-[4/5] rounded-[40px] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1499728603263-13726abce5fd?auto=format&fit=crop&q=80&w=800"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-xl font-bold">Hubungan yang Sehat</h4>
+                        <p class="text-cp-muted">Berkomunikasi dengan batasan yang jelas dan penuh kasih sayang.</p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="aspect-[4/5] rounded-[40px] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=800"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-xl font-bold">Kejelasan Tujuan</h4>
+                        <p class="text-cp-muted">Menemukan kembali jati diri dan tujuan hidup yang sempat hilang.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [OUR METHOD / PROCESS] - Clarity of Action -->
+    <section id="process" class="py-32 bg-cp-primary text-white rounded-[64px] mx-4 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24">
+            <div class="space-y-8">
+                <h2 class="font-serif text-[56px] md:text-[84px] leading-[0.9] italic font-normal">Satu langkah <br>
+                    menuju Anda yang baru.</h2>
+                <p class="text-xl opacity-60">Tidak ada tebakan. Hanya metode terstruktur untuk pemulihan jangka panjang
+                    Anda.</p>
+                <div class="pt-10">
+                    <a href="#booking"
+                        class="inline-block bg-white text-cp-primary px-8 py-4 rounded-full font-bold hover:scale-105 transition-all">See
+                        Available Slots</a>
+                </div>
+            </div>
+            <div class="space-y-16">
+                <!-- Step -->
+                <div class="flex gap-10">
+                    <span class="font-serif italic text-4xl opacity-20">01.</span>
+                    <div class="space-y-3">
+                        <h4 class="text-2xl font-bold">The Insight Session</h4>
+                        <p class="text-lg opacity-60">Konsultasi 60 menit untuk memetakan tantangan Anda dan menentukan
+                            kecocokan terapis.</p>
+                    </div>
+                </div>
+                <!-- Step -->
+                <div class="flex gap-10">
+                    <span class="font-serif italic text-4xl opacity-20">02.</span>
+                    <div class="space-y-3">
+                        <h4 class="text-2xl font-bold">Tailored Therapy</h4>
+                        <p class="text-lg opacity-60">Sesi mingguan yang dipersonalisasi berdasarkan kebutuhan emosional
+                            dan kognitif unik Anda.</p>
+                    </div>
+                </div>
+                <!-- Step -->
+                <div class="flex gap-10">
+                    <span class="font-serif italic text-4xl opacity-20">03.</span>
+                    <div class="space-y-3">
+                        <h4 class="text-2xl font-bold">Toolsets for Life</h4>
+                        <p class="text-lg opacity-60">Kami membekali Anda dengan strategi praktis yang bisa Anda gunakan
+                            selamanya, bahkan setelah terapi selesai.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [TESTIMONIALS] - Social Proof -->
+    <section id="testimonials" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center space-y-12">
+            <i data-lucide="quote" class="mx-auto opacity-10" size="64"></i>
+            <h2 class="font-serif text-3xl md:text-5xl italic text-stone-600 leading-snug">
+                "Saya sempat ragu untuk memulai terapi, tapi di Clearpath saya merasa didengar, bukan hanya dianalisis.
+                Hidup saya berubah total."
+            </h2>
+            <div class="flex flex-col items-center gap-4">
+                <img src="https://i.pravatar.cc/80?u=clinic" class="w-16 h-16 rounded-full grayscale">
+                <div class="flex flex-col">
+                    <span class="font-bold text-sm tracking-widest uppercase">Andrean Pratama</span>
+                    <span class="text-xs text-cp-muted">Entrepreneur</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [BOOKING / FINAL ACTION] - The Goal -->
+    <section id="booking" class="py-40 px-6 bg-cp-cream text-center">
+        <div class="max-w-3xl mx-auto space-y-10">
+            <h2 class="font-serif text-[56px] md:text-[72px] leading-tight tracking-tight">Hari ini adalah <span
+                    class="italic font-normal">hari baik untuk mulai.</span></h2>
+            <p class="text-lg text-cp-muted">Pilih waktu konsultasi pertama Anda. Privasi Anda adalah prioritas utama
+                kami.</p>
+            <div class="flex flex-col gap-4 items-center">
+                <button
+                    class="bg-cp-primary text-white px-12 py-6 rounded-full text-xl font-bold shadow-2xl hover:scale-105 active:scale-95 transition-all w-fit">
+                    Book Discovery Session
+                </button>
+                <p class="text-sm font-medium opacity-50 flex items-center gap-2">
+                    <i data-lucide="lock" size="14"></i> 100% Confidential & Secure
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- [FOOTER] -->
+    <footer class="py-20 px-6 border-t border-cp-border">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
+            <div class="space-y-4">
+                <span class="font-serif italic text-3xl">Clearpath</span>
+                <p class="text-sm text-cp-muted max-w-xs leading-relaxed">Helping thousands navigate their paths since
+                    2012. Managed by licensed professionals in Jakarta & Singapore.</p>
+            </div>
+            <div class="flex gap-20">
+                <div class="flex flex-col gap-4">
+                    <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Contact</span>
+                    <a href="#"
+                        class="text-sm font-semibold hover:opacity-50 transition-opacity">hello@clearpath.com</a>
+                    <a href="#" class="text-sm font-semibold hover:opacity-50 transition-opacity">WhatsApp Support</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Follow</span>
+                    <a href="#" class="text-sm font-semibold hover:opacity-50 transition-opacity">Instagram</a>
+                    <a href="#" class="text-sm font-semibold hover:opacity-50 transition-opacity">Journal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Lab -->
+    <a href="../../index.html"
+        class="fixed bottom-6 left-6 bg-white border border-stone-200 px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl z-50">
+        <i data-lucide="arrow-left" size="16"></i> Lab Launcher
+    </a>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

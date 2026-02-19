@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steal Like an Artist | Summary by Austin Kleon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=IBM+Plex+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;900&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        marker: ['"Gochi Hand"', 'cursive'],
+                        mono: ['"IBM Plex Mono"', 'monospace'],
+                        serif: ['Lora', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'artist-paper': '#F2F2F2',
+                        'artist-black': '#121212'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F2F2F2;
+            color: #121212;
+            overflow-x: hidden;
+        }
+
+        .snap-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+
+        .snap-section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            border-bottom: 2px solid #000;
+        }
+
+        .marker-title {
+            font-family: 'Gochi Hand', cursive;
+        }
+
+        .thick-border {
+            border: 8px solid #121212;
+        }
+
+        .marker-underline {
+            background-image: linear-gradient(120deg, #fdfb72 0%, #fdfb72 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.3em;
+            background-position: 0 88%;
+        }
+
+        .sketch-box {
+            border: 3px solid #121212;
+            position: relative;
+            background: #fff;
+            box-shadow: 10px 10px 0px #121212;
+        }
+
+        /* Custom ink splatter simulation */
+        .splatter {
+            position: absolute;
+            background: #121212;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            opacity: 0.1;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+    </style>
+</head>
+
+<body class="font-serif">
+
+    <div class="snap-container">
+
+        <!-- HERO PAGE -->
+        <section class="snap-section bg-white">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="mb-4 font-mono uppercase tracking-[0.2em] text-sm">A Summary Project</div>
+                <h1 class="text-7xl md:text-9xl font-sans font-black uppercase leading-none mb-8">
+                    Steal<br>Like An<br><span class="marker-title lowercase text-6xl md:text-8xl">Artist</span>
+                </h1>
+                <div class="thick-border inline-block px-8 py-4 mb-8">
+                    <p class="text-xl font-mono font-bold">10 THINGS NOBODY TOLD YOU ABOUT BEING CREATIVE</p>
+                </div>
+                <p class="text-2xl italic">by Austin Kleon</p>
+                <div class="mt-20 animate-bounce">
+                    <div class="font-mono text-xs uppercase tracking-widest">Scroll to start stealing</div>
+                    <div class="w-px h-12 bg-artist-black mx-auto mt-4"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTRODUCTION -->
+        <section class="snap-section bg-artist-paper">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl font-sans font-black mb-10 underline decoration-8">THE CREATIVE MANIFESTO</h2>
+                <div class="space-y-8 text-xl leading-relaxed">
+                    <p>Every artist gets asked the question, <span class="marker-underline">"Where do you get your
+                            ideas?"</span></p>
+                    <p class="sketch-box p-8 text-2xl font-bold">The honest artist answers, "I steal them."</p>
+                    <p>Nothing is original. All creative work builds on what came before. An artist is a collector, not
+                        a hoarder. You are the sum of your influences.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 1 -->
+        <section class="snap-section bg-white">
+            <div class="flex flex-col md:flex-row gap-12 max-w-6xl mx-auto items-center">
+                <div class="text-8xl font-sans font-black opacity-10">01</div>
+                <div>
+                    <h2 class="text-5xl font-sans font-black mb-6 uppercase">Steal Like An Artist</h2>
+                    <div class="space-y-4 text-lg">
+                        <p class="font-bold underline text-2xl mb-4">Good Theft vs. Bad Theft</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="border-2 border-black p-4">
+                                <p class="font-mono font-bold mb-2">GOOD THEFT</p>
+                                <ul class="list-disc ml-5 text-sm">
+                                    <li>Honor</li>
+                                    <li>Study</li>
+                                    <li>Steal from many</li>
+                                    <li>Credit</li>
+                                    <li>Transform</li>
+                                </ul>
+                            </div>
+                            <div class="border-2 border-black p-4 bg-artist-black text-white">
+                                <p class="font-mono font-bold mb-2">BAD THEFT</p>
+                                <ul class="list-disc ml-5 text-sm">
+                                    <li>Degrade</li>
+                                    <li>Skim</li>
+                                    <li>Steal from one</li>
+                                    <li>Plagiarize</li>
+                                    <li>Imitate</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mt-6 italic">"Steal from one, it's plagiarism; steal from many, it's research."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 2 -->
+        <section class="snap-section bg-artist-paper">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="text-6xl font-sans font-black opacity-10">02</div>
+                    <h2 class="text-5xl font-sans font-black mb-4">DON'T WAIT UNTIL YOU KNOW WHO YOU ARE TO GET STARTED
+                    </h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="sketch-box p-6">
+                        <h3 class="font-mono font-bold mb-2">FAKE IT 'TIL YOU MAKE IT</h3>
+                        <p>You have to dress for the job you want, not the job you have. Start doing the work you want
+                            to be doing before you feel ready.</p>
+                    </div>
+                    <div class="sketch-box p-6 bg-white">
+                        <h3 class="font-mono font-bold mb-2">COPY YOUR HEROES</h3>
+                        <p>Imitation is not flattery. It's practice. By failing to copy your heroes, you find where you
+                            differ. That's where your own style lives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 3 -->
+        <section class="snap-section bg-white">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="text-6xl font-sans font-black opacity-10">03</div>
+                <h2 class="text-5xl font-sans font-black mb-8">WRITE THE BOOK YOU WANT TO READ</h2>
+                <p class="text-3xl leading-snug mb-8">
+                    "Draw the art you want to see, start the business you want to run, play the music you want to hear."
+                </p>
+                <div class="h-1 w-20 bg-black mx-auto"></div>
+                <p class="mt-8 font-mono text-sm uppercase">Solve your own problems. Fill your own gaps.</p>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 4 -->
+        <section class="snap-section bg-artist-paper">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-6xl font-sans font-black opacity-10">04</div>
+                <h2 class="text-5xl font-sans font-black mb-8">USE YOUR HANDS</h2>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1 p-8 border-4 border-black bg-white rounded-xl">
+                        <h3 class="text-2xl font-black mb-4 uppercase">The Analog Desk</h3>
+                        <p class="mb-4">Where you play, doodle, and scratch things out. No screens allowed. This is
+                            where the magic starts.</p>
+                        <i data-lucide="pencil" class="text-artist-black mb-2"></i>
+                    </div>
+                    <div class="flex-1 p-8 border-4 border-black bg-white rounded-xl">
+                        <h3 class="text-2xl font-black mb-4 uppercase">The Digital Desk</h3>
+                        <p class="mb-4">Where you edit, publish, and polish. Once the idea is born analog, bring it here
+                            to finish.</p>
+                        <i data-lucide="monitor" class="text-artist-black"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 5 -->
+        <section class="snap-section bg-white">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-6xl font-sans font-black opacity-10">05</div>
+                <h2 class="text-5xl font-sans font-black mb-8 underline decoration-double">SIDE PROJECTS & HOBBIES</h2>
+                <div class="space-y-6 text-xl">
+                    <p class="marker-title text-3xl">Practice Productive Procrastination.</p>
+                    <p>The work you do while you're procrastinating is probably the work you should be doing for the
+                        rest of your life.</p>
+                    <p class="bg-artist-black text-white p-6 rounded-lg font-mono text-base">
+                        Don't throw any of yourself away. If you have two or three passions, don't feel like you have to
+                        pick one. Let them talk to each other.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 6 -->
+        <section class="snap-section bg-artist-paper">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="text-6xl font-sans font-black opacity-10">06</div>
+                <h2 class="text-5xl font-sans font-black mb-6">DO GOOD WORK AND SHARE IT WITH PEOPLE</h2>
+                <div class="thick-border p-10 bg-white">
+                    <p class="text-2xl font-bold mb-4">THE SECRET FORMULA:</p>
+                    <div class="text-4xl font-black">
+                        STEP 1: DO GOOD WORK.<br>
+                        <span class="text-xl text-gray-400 font-mono">(this takes a long time)</span><br><br>
+                        STEP 2: SHARE IT.<br>
+                        <span class="text-xl text-gray-400 font-mono text-sm">(post it on the internet)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 7 -->
+        <section class="snap-section bg-white">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-6xl font-sans font-black opacity-10">07</div>
+                <h2 class="text-5xl font-sans font-black mb-8">GEOGRAPHY IS NO LONGER OUR MASTER</h2>
+                <p class="text-2xl leading-relaxed mb-6">You don't need to live in New York or London to be part of the
+                    creative scene. You can build your own world from your bedroom.</p>
+                <div class="sketch-box p-8 bg-black text-white rounded-full text-center">
+                    <span class="text-3xl font-mono">YOUR STUDIO IS A PORTAL</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 8 -->
+        <section class="snap-section bg-artist-paper">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-6xl font-sans font-black opacity-10">08</div>
+                <h2 class="text-5xl font-sans font-black mb-8">BE NICE. (THE WORLD IS A SMALL TOWN)</h2>
+                <ul class="space-y-4 text-xl font-bold">
+                    <li class="flex items-center gap-4">
+                        <div class="w-4 h-4 bg-black"></div> Make friends, ignore enemies.
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div class="w-4 h-4 bg-black"></div> Write fan letters to your heroes.
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div class="w-4 h-4 bg-black"></div> Don't look for validation, look for inspiration.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 9 -->
+        <section class="snap-section bg-white">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-6xl font-sans font-black opacity-10">09</div>
+                <h2 class="text-5xl font-sans font-black mb-8">BE BORING. (IT'S THE ONLY WAY)</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-6 border-2 border-dashed border-black">
+                        <h4 class="font-mono font-black mb-2">THE CALENDAR</h4>
+                        <p class="text-sm italic">"Keep a visual record of your streaks. Don't break the chain."</p>
+                    </div>
+                    <div class="p-6 border-2 border-dashed border-black">
+                        <h4 class="font-mono font-black mb-2">THE LOGBOOK</h4>
+                        <p class="text-sm italic">"List what you did today. It's not a diary, it's a record of tiny
+                            wins."</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-xl">Creativity requires routine. Establish a practice so you can get the work done
+                    without thinking about it.</p>
+            </div>
+        </section>
+
+        <!-- PRINCIPLE 10 -->
+        <section class="snap-section bg-artist-black text-white">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="text-6xl font-sans font-black opacity-20">10</div>
+                <h2 class="text-5xl font-sans font-black mb-8">CREATIVITY IS SUBTRACTION</h2>
+                <p class="text-2xl italic mb-10">"In this age of information abundance, those who get ahead will be the
+                    folks who figure out what to leave out."</p>
+                <div class="thick-border border-white p-8">
+                    <h3 class="text-4xl font-black mb-4">LIMIT YOURSELF.</h3>
+                    <p>Constraints are freedom. Use only one color. Write in 100 words. Build a world with 3 rules.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="snap-section bg-white text-center">
+            <h2 class="text-7xl md:text-9xl font-sans font-black mb-10 uppercase">GO MAKE<br><span
+                    class="marker-title text-8xl md:text-[10rem] lowercase">something</span></h2>
+            <div class="space-y-4">
+                <p class="text-xl font-mono uppercase tracking-widest">Everything is a remix.</p>
+                <a href="../../index.html"
+                    class="inline-block thick-border px-10 py-4 font-mono font-bold hover:bg-artist-black hover:text-white transition-all">
+                    GET BACK TO WORK <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

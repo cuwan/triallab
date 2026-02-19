@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness Studio | Premium Landing Page Experiment</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wellness-dark': '#0F172A',
+                        'wellness-mint': '#22C55E',
+                        'wellness-soft': '#F8F9FA',
+                    },
+                    fontFamily: {
+                        sans: ['Instrument Sans', 'Inter', 'sans-serif'],
+                    },
+                    backdropBlur: {
+                        'premium': '12px',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass-gradient {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
+        }
+
+        .hero-pattern {
+            background-image: radial-gradient(#E2E8F0 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-wellness-dark selection:bg-wellness-mint selection:text-white">
+
+    <!-- NAVIGATION: Floating Glassmorphism -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[1240px]">
+        <div
+            class="flex items-center justify-between px-6 py-4 bg-white/70 backdrop-blur-premium border border-white/40 rounded-[24px] shadow-sm">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-wellness-dark rounded-full flex items-center justify-center text-white">
+                    <i data-lucide="sparkles" size="18"></i>
+                </div>
+                <span class="font-bold text-[18px] tracking-tight">ZENITH</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#"
+                    class="text-[14px] font-medium text-slate-600 hover:text-wellness-dark transition-colors">Program</a>
+                <a href="#"
+                    class="text-[14px] font-medium text-slate-600 hover:text-wellness-dark transition-colors">Studio</a>
+                <a href="#"
+                    class="text-[14px] font-medium text-slate-600 hover:text-wellness-dark transition-colors">Community</a>
+                <a href="#"
+                    class="text-[14px] font-medium text-slate-600 hover:text-wellness-dark transition-colors">About</a>
+            </div>
+
+            <button
+                class="bg-wellness-dark text-white px-5 py-2.5 rounded-full text-[14px] font-semibold hover:bg-slate-800 transition-all shadow-lg active:scale-95">
+                Join Studio
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION: Asymmetrical & Premium -->
+    <section class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-wellness-soft">
+        <div class="absolute inset-0 hero-pattern opacity-40"></div>
+
+        <div class="container mx-auto px-6 max-w-[1280px] z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+
+                <!-- Text-Stack -->
+                <div class="flex flex-col gap-8 w-full lg:w-1/2">
+                    <div class="flex flex-col gap-4">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full w-fit">
+                            <span class="w-2 h-2 bg-wellness-mint rounded-full animate-pulse"></span>
+                            <span class="text-[12px] font-bold uppercase tracking-widest text-slate-500">New Winter
+                                Retreat 2026</span>
+                        </div>
+                        <h1
+                            class="text-[48px] md:text-[64px] lg:text-[76px] font-bold leading-[1.05] tracking-[-0.04em]">
+                            Find your balance, <br>
+                            <span class="text-slate-400">within the flow.</span>
+                        </h1>
+                        <p class="text-[18px] md:text-[20px] text-slate-500 max-w-[500px] leading-relaxed">
+                            A sanctuary designed for your mental and physical longevity. Experience holistic wellness
+                            combined with state-of-the-art restorative technology.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button
+                            class="bg-wellness-dark text-white px-8 py-4 rounded-2xl text-[16px] font-bold hover:shadow-xl hover:-translate-y-1 transition-all">
+                            Book a Session
+                        </button>
+                        <button
+                            class="flex items-center gap-2 px-8 py-4 bg-white border border-slate-200 rounded-2xl text-[16px] font-bold hover:bg-slate-50 transition-all">
+                            <i data-lucide="play-circle" size="20"></i>
+                            Watch Experience
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-4">
+                        <div class="flex -space-x-3">
+                            <img src="https://i.pravatar.cc/100?u=1"
+                                class="w-10 h-10 rounded-full border-2 border-white object-cover">
+                            <img src="https://i.pravatar.cc/100?u=2"
+                                class="w-10 h-10 rounded-full border-2 border-white object-cover">
+                            <img src="https://i.pravatar.cc/100?u=3"
+                                class="w-10 h-10 rounded-full border-2 border-white object-cover">
+                        </div>
+                        <p class="text-[14px] text-slate-500">
+                            Join <span class="text-wellness-dark font-bold">2,400+</span> seekers finding peace.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Visual-Stack (Asymmetrical & Glassmorphism) -->
+                <div class="relative w-full lg:w-1/2 flex justify-center">
+                    <div
+                        class="relative w-full max-w-[500px] aspect-[4/5] rounded-[48px] overflow-hidden shadow-2xl skew-y-1 rotate-2">
+                        <!-- Image: Lummi-style High-End 3D Abstract for a Wellness Studio - Soothing Zen Garden Minimalism -->
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800"
+                            alt="Zen Meditation" class="w-full h-full object-cover">
+
+                        <!-- Floating Glass Cards -->
+                        <div class="absolute top-10 -left-12 p-6 glass-gradient backdrop-blur-premium border border-white/40 rounded-3xl shadow-xl w-60 hidden md:block animate-bounce"
+                            style="animation-duration: 4s;">
+                            <div class="flex items-center gap-4 mb-3">
+                                <div
+                                    class="w-10 h-10 bg-wellness-mint/20 rounded-full flex items-center justify-center">
+                                    <i data-lucide="heart" class="text-wellness-mint" size="20"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] font-bold uppercase text-slate-400">Heart Rate</span>
+                                    <span class="text-[18px] font-bold">72 BPM</span>
+                                </div>
+                            </div>
+                            <div class="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="w-2/3 h-full bg-wellness-mint transition-all"></div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="absolute bottom-10 -right-8 p-6 bg-wellness-dark/90 backdrop-blur-premium text-white border border-white/10 rounded-3xl shadow-2xl w-56 hidden md:block">
+                            <p class="text-[14px] font-medium opacity-70 mb-2">Next Session</p>
+                            <h4 class="text-[18px] font-bold">Full Moon Yoga</h4>
+                            <p class="text-[12px] opacity-60 mt-4">Starts in 24 mins</p>
+                        </div>
+                    </div>
+
+                    <!-- Background Decoration -->
+                    <div class="absolute -top-20 -right-20 w-80 h-80 bg-wellness-mint/10 rounded-full blur-[100px]">
+                    </div>
+                    <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-slate-200/50 rounded-full blur-[100px]"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE GRID: Bento Style -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-[1280px]">
+            <div class="flex flex-col gap-12">
+
+                <div class="flex flex-col gap-4 text-center items-center">
+                    <span class="text-[14px] font-bold text-wellness-mint uppercase tracking-widest">The
+                        Modalities</span>
+                    <h2 class="text-[36px] md:text-[48px] font-bold tracking-tight">Evolve through practice.</h2>
+                </div>
+
+                <!-- Feature-Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+                    <!-- Bento Card 1: Large -->
+                    <div
+                        class="md:col-span-8 group relative overflow-hidden bg-slate-50 rounded-[32px] p-10 flex flex-col justify-between min-h-[400px]">
+                        <div
+                            class="flex flex-col gap-4 max-w-[340px] z-10 transition-transform group-hover:translate-x-2">
+                            <h3 class="text-[28px] font-bold">Immersive Meditation</h3>
+                            <p class="text-[16px] text-slate-500">Step into a room where sound, light, and aroma
+                                converge to guide your focus deeper than ever before.</p>
+                            <a href="#"
+                                class="inline-flex items-center gap-2 font-bold text-[14px] hover:gap-3 transition-all">
+                                Explore Session <i data-lucide="arrow-right" size="16"></i>
+                            </a>
+                        </div>
+                        <!-- Illustration Placeholder -->
+                        <div
+                            class="absolute right-0 bottom-0 w-2/3 h-full opacity-10 group-hover:opacity-20 transition-all scale-110 group-hover:scale-100">
+                            <i data-lucide="wind" class="w-full h-full text-wellness-dark"
+                                style="stroke-width: 0.5px;"></i>
+                        </div>
+                    </div>
+
+                    <!-- Bento Card 2: Medium -->
+                    <div
+                        class="md:col-span-4 bg-wellness-dark text-white rounded-[32px] p-10 flex flex-col justify-between min-h-[400px]">
+                        <div class="flex flex-col gap-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="zap" size="24"></i>
+                            </div>
+                            <h3 class="text-[24px] font-bold">Infrared Recover</h3>
+                        </div>
+                        <p class="text-[16px] opacity-60">Cellular regeneration using advanced near and far-infrared
+                            technology.</p>
+                    </div>
+
+                    <!-- Bento Card 3: Small -->
+                    <div
+                        class="md:col-span-4 border border-slate-100 rounded-[32px] p-10 hover:border-wellness-mint transition-all">
+                        <div class="flex flex-col gap-6">
+                            <h3 class="text-[22px] font-bold leading-tight">Expert-Led <br>Community</h3>
+                            <p class="text-[14px] text-slate-500">Access private circles led by world-class mindfulness
+                                instructors.</p>
+                            <i data-lucide="users" class="text-slate-200" size="40"></i>
+                        </div>
+                    </div>
+
+                    <!-- Bento Card 4: Long -->
+                    <div
+                        class="md:col-span-8 bg-wellness-soft rounded-[32px] p-10 flex flex-col md:flex-row items-center gap-10">
+                        <div class="flex flex-col gap-4 flex-1">
+                            <h3 class="text-[24px] font-bold">The Digital Companion</h3>
+                            <p class="text-[16px] text-slate-500">Track your biomarkers and book classes seamlessly with
+                                our native app.</p>
+                            <button
+                                class="w-fit bg-white border border-slate-200 px-6 py-3 rounded-xl text-[14px] font-bold flex items-center gap-2">
+                                <i data-lucide="apple" size="18"></i>
+                                App Store
+                            </button>
+                        </div>
+                        <div
+                            class="flex-1 w-full bg-white rounded-2xl h-40 shadow-sm border border-slate-100 flex items-center justify-center">
+                            <span class="text-slate-300 font-bold uppercase tracking-widest text-[12px]">App
+                                Preview</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER: Simple & Clean -->
+    <footer class="py-12 border-t border-slate-100">
+        <div class="container mx-auto px-6 max-w-[1280px]">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-2 opacity-50">
+                    <div class="w-6 h-6 bg-wellness-dark rounded-full"></div>
+                    <span class="font-bold">ZENITH</span>
+                </div>
+                <div class="flex gap-8 text-[14px] text-slate-500">
+                    <a href="#" class="hover:text-wellness-dark">Terms</a>
+                    <a href="#" class="hover:text-wellness-dark">Privacy</a>
+                    <a href="#" class="hover:text-wellness-dark">Instagram</a>
+                </div>
+                <p class="text-[14px] text-slate-400">© 2026 Zenith Wellness. All rights preserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="../../index.html"
+        class="fixed bottom-6 right-6 bg-black text-white px-6 py-3 rounded-full text-[14px] font-bold flex items-center gap-2 shadow-2xl z-50 hover:scale-105 active:scale-95 transition-all">
+        <i data-lucide="arrow-left" size="16"></i> Lab Launcher
+    </a>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

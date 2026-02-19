@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRVX | Designed to Think, Built to Evolve</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'krvx-bg': '#E2E3DB',
+                        'krvx-dark': '#0A0A0A',
+                        'krvx-orange': '#FF4D00',
+                        'krvx-muted': '#666666',
+                        'krvx-border': 'rgba(0,0,0,0.1)',
+                    },
+                    fontFamily: {
+                        serif: ['Instrument Serif', 'serif'],
+                        sans: ['Instrument Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #E2E3DB;
+            color: #0A0A0A;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .hero-clip {
+            clip-path: inset(0% 0% 0% 0% round 140px);
+        }
+
+        .stagger-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stagger-card:hover {
+            transform: translateY(-8px);
+            background-color: #D6D7CF;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .krvx-btn {
+            background: #FF4D00;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .krvx-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 77, 0, 0.2);
+        }
+
+        .krvx-btn i {
+            background: #fff;
+            color: #FF4D00;
+            border-radius: 50%;
+            padding: 2px;
+        }
+
+        .list-item {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 32px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .list-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .active-list-bg {
+            background: #151515;
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+
+<body class="font-sans overflow-x-hidden">
+
+    <!-- [NAV] -->
+    <nav class="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference text-white">
+        <div class="flex gap-8 text-[12px] font-bold uppercase tracking-widest">
+            <a href="#">Features</a>
+            <a href="#">Technology</a>
+        </div>
+        <div class="font-serif italic text-3xl">KRVX</div>
+        <div class="flex gap-8 text-[12px] font-bold uppercase tracking-widest">
+            <a href="#">System</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+    <!-- [HERO SECTION] -->
+    <header class="pt-40 pb-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <h1 class="font-serif text-[64px] md:text-[100px] leading-[0.9] tracking-tight">
+                Designed to Think <br> Built to Evolve
+            </h1>
+            <p class="text-lg md:text-xl text-krvx-muted max-w-lg mx-auto leading-relaxed">
+                Elevate your world with autonomous robotics and smarter company framework.
+            </p>
+            <div class="pt-4">
+                <a href="#" class="krvx-btn">
+                    Explore IT <i data-lucide="arrow-right" size="16"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Visual: Large Inset Image -->
+        <div
+            class="mt-20 max-w-7xl mx-auto h-[500px] md:h-[600px] bg-white rounded-[140px] overflow-hidden shadow-sm flex items-center justify-center relative">
+            <!-- [Image: Lummi-style High-End 3D Industrial Robotic Head Component - Sleek Black Finish, Minimalist] -->
+            <img src="https://images.unsplash.com/photo-1546776230-bb862b4856b2?auto=format&fit=crop&q=80&w=1200"
+                alt="Robotics Unit" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"></div>
+        </div>
+    </header>
+
+    <!-- [CORE SYSTEMS] - Bento Intro -->
+    <section class="py-32 px-6">
+        <div class="max-w-7xl mx-auto space-y-24">
+            <div class="text-center space-y-4">
+                <h2 class="font-serif text-6xl italic">Core Systems</h2>
+                <p class="text-krvx-muted max-w-sm mx-auto">Early intervention in AI long-range and synergistic dynamics
+                    for leading, learning and resulting in success.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="stagger-card bg-[#E9EAE2] p-10 rounded-[40px] border border-krvx-border space-y-16">
+                    <div class="w-10 h-10 bg-krvx-orange rounded-lg flex items-center justify-center text-white">
+                        <i data-lucide="cog" size="20"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">Unmanned Robotic <br> Systems</h3>
+                        <p class="text-sm text-krvx-muted leading-relaxed">Integrated core processing for autonomous
+                            navigation and task execution in complex environments.</p>
+                    </div>
+                    <img src="https://i.pravatar.cc/100?u=tech1" class="w-20 opacity-10 grayscale">
+                </div>
+                <!-- Card 2 -->
+                <div class="stagger-card bg-[#E9EAE2] p-10 rounded-[40px] border border-krvx-border space-y-16">
+                    <div class="w-10 h-10 border border-krvx-dark rounded-lg flex items-center justify-center">
+                        <i data-lucide="zap" size="20"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">Adaptive Learning <br> Engine</h3>
+                        <p class="text-sm text-krvx-muted leading-relaxed">Real-time neural updates that allow systems
+                            to learn through environmental interaction.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="stagger-card bg-[#E9EAE2] p-10 rounded-[40px] border border-krvx-border space-y-16">
+                    <div class="w-10 h-10 border border-krvx-dark rounded-lg flex items-center justify-center">
+                        <i data-lucide="target" size="20"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">Precision Motion <br> Control</h3>
+                        <p class="text-sm text-krvx-muted leading-relaxed">Micron-level accuracy for delicate operations
+                            in industrial and medical contexts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [STORYTELLING SECTION] - Dark Contrast -->
+    <section class="py-20 px-4">
+        <div class="bg-krvx-dark rounded-[60px] p-8 md:p-20 overflow-hidden relative">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20">
+                <div class="flex-1 space-y-10">
+                    <h2 class="text-white font-serif text-5xl md:text-7xl leading-tight">
+                        KRVX is a robotics company focused on building intelligent companions through <span
+                            class="text-krvx-orange italic">AI engineering</span>
+                    </h2>
+                    <a href="#" class="krvx-btn">
+                        Learn More <i data-lucide="arrow-right" size="16"></i>
+                    </a>
+                </div>
+                <div class="flex-1 relative">
+                    <!-- [Image: Close-up of Robotic Arm/Joint - Tech Aesthetic] -->
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200"
+                        class="rounded-[40px] w-full aspect-square object-cover shadow-2xl">
+
+                    <!-- Social icons on image -->
+                    <div class="absolute bottom-8 right-8 flex gap-3">
+                        <div
+                            class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white">
+                            <i data-lucide="twitter" size="16"></i></div>
+                        <div
+                            class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white">
+                            <i data-lucide="linkedin" size="16"></i></div>
+                        <div
+                            class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white">
+                            <i data-lucide="github" size="16"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [OUR TECHNOLOGY] - Dark Accordion/List -->
+    <section class="py-32 bg-krvx-dark text-white pt-40 pb-60">
+        <div class="max-w-7xl mx-auto px-6 space-y-24">
+            <div class="text-center space-y-4">
+                <h2 class="font-serif text-6xl italic">Our Technology</h2>
+                <p class="opacity-50 max-w-sm mx-auto">We leverage multi-modal models to produce highly reliable,
+                    autonomous machines for high-stakes environments.</p>
+            </div>
+
+            <div class="space-y-0">
+                <div class="list-item flex justify-between items-center group">
+                    <div class="space-y-2">
+                        <h4 class="text-2xl font-bold">Cognitive Intelligence Core</h4>
+                        <p class="opacity-40 text-sm max-w-sm">Neural network optimized for processing visual and
+                            tactile data concurrently.</p>
+                    </div>
+                    <div
+                        class="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center group-hover:bg-krvx-orange group-hover:border-krvx-orange transition-all">
+                        <i data-lucide="chevron-right" size="18"></i></div>
+                </div>
+
+                <div class="list-item flex justify-between items-center group">
+                    <div class="space-y-2">
+                        <h4 class="text-2xl font-bold">Perception & Sensor Fusion</h4>
+                        <p class="opacity-40 text-sm max-w-sm">Combining LiDAR and stereo vision for absolute 3D spatial
+                            awareness.</p>
+                    </div>
+                    <div
+                        class="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center group-hover:bg-krvx-orange group-hover:border-krvx-orange transition-all">
+                        <i data-lucide="chevron-right" size="18"></i></div>
+                </div>
+
+                <div class="active-list-bg flex justify-between items-center group relative overflow-hidden">
+                    <div class="space-y-4 z-10">
+                        <h4 class="text-3xl font-bold">Autonomous Control Layer</h4>
+                        <p class="opacity-60 text-lg max-w-md">Proprietary logic facilitating decentralized
+                            decision-making for swarm robotics and industrial fleets.</p>
+                    </div>
+                    <div class="w-14 h-14 bg-krvx-orange rounded-full flex items-center justify-center shadow-lg"><i
+                            data-lucide="play" fill="white" size="20"></i></div>
+                    <!-- Red Glow effect like the image -->
+                    <div class="absolute bottom-4 right-20 w-8 h-2 bg-krvx-orange blur-sm animate-pulse"></div>
+                </div>
+
+                <div class="list-item flex justify-between items-center group">
+                    <div class="space-y-2">
+                        <h4 class="text-2xl font-bold">Optimal Security Learning Pipeline</h4>
+                        <p class="opacity-40 text-sm max-w-sm">End-to-end encrypted learning channels to protect
+                            intellectual property.</p>
+                    </div>
+                    <div
+                        class="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center group-hover:bg-krvx-orange group-hover:border-krvx-orange transition-all">
+                        <i data-lucide="chevron-right" size="18"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [FINAL CTA] - Big Typography -->
+    <section class="py-40 bg-krvx-dark text-white text-center pb-80">
+        <div class="max-w-5xl mx-auto space-y-16">
+            <h2 class="font-serif text-[72px] md:text-[140px] leading-[0.8] tracking-tighter">
+                Your System <br> Is Ready
+            </h2>
+            <a href="#" class="krvx-btn scale-125">
+                ACTIVATE <i data-lucide="arrow-right" size="16"></i>
+            </a>
+            <div class="mt-20 flex justify-center">
+                <!-- [Image: Robotic Arm Chassis for Showcase] -->
+                <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&q=80&w=1200"
+                    class="max-w-2xl w-full mix-blend-screen opacity-80">
+            </div>
+        </div>
+    </section>
+
+    <!-- [FOOTER] -->
+    <footer class="py-12 px-8 bg-krvx-dark text-white/40 border-t border-white/5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
+                <a href="#">Features</a>
+                <a href="#">Technology</a>
+            </div>
+            <div class="font-serif italic text-2xl text-white">KRVX</div>
+            <div class="flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
+                <a href="#">Order</a>
+                <a href="#">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lab Launcher -->
+    <a href="../../index.html"
+        class="fixed bottom-8 left-8 bg-white text-krvx-dark px-6 py-3 rounded-full text-[14px] font-bold flex items-center gap-2 shadow-2xl z-50">
+        <i data-lucide="arrow-left" size="16"></i> Lab Launcher
+    </a>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

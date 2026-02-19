@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovernX | Advanced Trading Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gx-bg': '#0F1114',
+                        'gx-card': '#1A1D21',
+                        'gx-green': '#BCE45E',
+                        'gx-red': '#FF5C5C',
+                        'gx-yellow': '#FFD15C',
+                        'gx-muted': '#6F767E',
+                        'gx-border': 'rgba(255,255,255,0.05)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #0F1114;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bento-card {
+            background: #1A1D21;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 24px;
+        }
+
+        .nav-pill {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 100px;
+            padding: 6px 24px;
+        }
+
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.2s;
+        }
+
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Candlestick Mock */
+        .candle {
+            width: 6px;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .wick {
+            position: absolute;
+            width: 1px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 120%;
+            top: -10%;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="p-6">
+
+    <!-- [TOP NAVIGATION] -->
+    <header class="flex justify-between items-center mb-8 max-w-[1800px] mx-auto">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                <i data-lucide="zap" fill="black" class="text-black" size="18"></i>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-white font-sans uppercase">GovernX</span>
+        </div>
+
+        <div class="flex items-center bg-[#1A1D21]/80 backdrop-blur-xl border border-gx-border p-1.5 rounded-full">
+            <button data-tab="home"
+                class="tab-btn active bg-white text-black px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition-all">
+                <i data-lucide="home" size="16"></i> Home
+            </button>
+            <button data-tab="analytics"
+                class="tab-btn px-6 py-2 text-gx-muted hover:text-white text-sm font-medium flex items-center gap-2 transition-all">
+                <i data-lucide="bar-chart-2" size="16"></i> Analytics
+            </button>
+            <button data-tab="transactions"
+                class="tab-btn px-6 py-2 text-gx-muted hover:text-white text-sm font-medium flex items-center gap-2 transition-all">
+                <i data-lucide="repeat" size="16"></i> Transactions
+            </button>
+            <button data-tab="payment"
+                class="tab-btn px-6 py-2 text-gx-muted hover:text-white text-sm font-medium flex items-center gap-2 transition-all">
+                <i data-lucide="credit-card" size="16"></i> Payment
+            </button>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button
+                class="w-10 h-10 rounded-full border border-gx-border flex items-center justify-center text-gx-muted">
+                <i data-lucide="bell" size="18"></i>
+            </button>
+            <img src="https://i.pravatar.cc/150?u=trader" class="w-10 h-10 rounded-full object-cover">
+        </div>
+    </header>
+
+    <!-- [TAB CONTENT: HOME] -->
+    <main id="tab-home"
+        class="tab-content grid grid-cols-1 md:grid-cols-12 gap-6 max-w-[1800px] mx-auto opacity-100 transition-opacity duration-300">
+        <!-- [NVIDIA STOCK CHART] - Top Left -->
+        <div class="md:col-span-8 bento-card flex flex-col gap-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <img src="https://logo.clearbit.com/nvidia.com" class="w-8 h-8 rounded-full">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold">NVIDIA Corporation (NVDA)</span>
+                            <span class="text-xs text-gx-muted">4H</span>
+                            <span
+                                class="px-2 py-0.5 bg-blue-500/10 text-blue-400 text-[10px] font-bold rounded">NASDAQ</span>
+                        </div>
+                        <div class="text-[10px] text-gx-muted flex gap-3 mt-1 uppercase tracking-widest">
+                            <span>O <span class="text-white">190.13</span></span>
+                            <span>H <span class="text-white">190.18</span></span>
+                            <span>L <span class="text-white">190.05</span></span>
+                            <span>C <span class="text-white font-bold text-gx-red">190.09</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-end">
+                <div>
+                    <div class="text-[44px] font-bold leading-none">190.53</div>
+                    <div class="text-gx-green text-sm font-bold mt-2">+1.92 (1.02%)</div>
+                </div>
+                <div class="flex gap-2">
+                    <button
+                        class="bg-gx-green/20 text-gx-green px-8 py-2.5 rounded-full font-bold transition-all hover:bg-gx-green/30">Buy</button>
+                    <button
+                        class="bg-gx-red text-white px-8 py-2.5 rounded-full font-bold shadow-lg shadow-gx-red/20 transition-all hover:scale-105">Sell</button>
+                </div>
+            </div>
+
+            <!-- Candlestick Mock Simulation -->
+            <div class="h-60 w-full flex items-end gap-3 mt-8 relative">
+                <div class="absolute inset-0 border-b border-gx-border opacity-20"></div>
+                <div class="absolute inset-0 flex flex-col justify-between py-4">
+                    <div class="border-t border-gx-border opacity-5 text-[10px] text-gx-muted flex justify-end">200.00
+                    </div>
+                    <div
+                        class="border-t border-gx-dashed opacity-5 text-[10px] text-gx-muted flex justify-end relative">
+                        <span class="absolute right-0 bg-white text-black px-2 py-0.5 rounded font-bold">190.53</span>
+                    </div>
+                    <div class="border-t border-gx-border opacity-5 text-[10px] text-gx-muted flex justify-end">180.00
+                    </div>
+                    <div class="border-t border-gx-border opacity-5 text-[10px] text-gx-muted flex justify-end">170.00
+                    </div>
+                </div>
+
+                <div class="flex-1 flex gap-2 items-end justify-between px-4 z-10">
+                    <div class="candle bg-gx-green h-[60%]">
+                        <div class="wick bg-gx-green"></div>
+                    </div>
+                    <div class="candle bg-gx-green h-[40%]">
+                        <div class="wick bg-gx-green"></div>
+                    </div>
+                    <div class="candle bg-gx-red h-[70%]">
+                        <div class="wick bg-gx-red"></div>
+                    </div>
+                    <div class="candle bg-gx-red h-[30%]">
+                        <div class="wick bg-gx-red"></div>
+                    </div>
+                    <div class="candle bg-gx-green h-[50%]">
+                        <div class="wick bg-gx-green"></div>
+                    </div>
+                    <div class="candle bg-gx-red h-[80%]">
+                        <div class="wick bg-gx-red"></div>
+                    </div>
+                    <div class="candle bg-gx-green h-[40%]">
+                        <div class="wick bg-gx-green"></div>
+                    </div>
+                    <div class="candle bg-gx-green h-[90%]">
+                        <div class="wick bg-gx-green"></div>
+                    </div>
+                    <div class="candle bg-gx-green h-[55%]">
+                        <div class="wick bg-gx-green"></div>
+                    </div>
+                    <div class="candle bg-gx-red h-[45%]">
+                        <div class="wick bg-gx-red"></div>
+                    </div>
+                    <div class="candle bg-gx-red h-[65%]">
+                        <div class="wick bg-gx-red"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-between text-[10px] text-gx-muted uppercase tracking-widest mt-4">
+                <span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span>
+            </div>
+        </div>
+
+        <!-- [PORTFOLIO BALANCE] - Top Right -->
+        <div class="md:col-span-4 bento-card flex flex-col justify-between">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-gx-muted text-sm mb-1">Portfolio Balance</p>
+                    <h2 class="text-3xl font-bold">$96,658.56</h2>
+                    <span
+                        class="text-[10px] font-bold text-gx-green bg-gx-green/10 px-2 py-1 rounded inline-flex items-center gap-1 mt-2">
+                        <i data-lucide="arrow-up" size="10"></i> 11.2%
+                        <span class="text-gx-muted font-normal ml-1">this month</span>
+                    </span>
+                </div>
+                <div class="w-40 bg-gx-green rounded-2xl p-4 text-black relative overflow-hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-[10px] font-bold">Debit Card</span>
+                        <div class="w-6 h-3 bg-black/20 rounded-full flex items-center px-0.5">
+                            <div class="w-2 h-2 bg-black rounded-full ml-auto"></div>
+                        </div>
+                    </div>
+                    <div class="text-lg font-bold">$12,658.24</div>
+                    <i data-lucide="credit-card" class="absolute -right-4 -bottom-4 opacity-10" size="64"></i>
+                </div>
+            </div>
+
+            <div class="h-32 mt-8">
+                <svg viewBox="0 0 400 100" class="w-full h-full">
+                    <path d="M0,80 Q50,20 100,60 T200,40 T300,70 T400,20" fill="none" stroke="#BCE45E" stroke-width="3"
+                        stroke-linecap="round"></path>
+                    <circle cx="400" cy="20" r="4" fill="#BCE45E"></circle>
+                </svg>
+            </div>
+            <div class="flex justify-between text-[10px] text-gx-muted mt-2 uppercase">
+                <span>Feb</span><span>Mar</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span>
+            </div>
+        </div>
+
+        <!-- Middle Row Components -->
+        <div class="md:col-span-3 bento-card space-y-4">
+            <div class="flex items-center gap-2">
+                <i data-lucide="pie-chart" class="text-gx-green" size="18"></i>
+                <h4 class="text-xs font-medium uppercase font-bold tracking-tight">Ownership Breakdown</h4>
+            </div>
+            <div class="relative flex flex-col items-center justify-center pt-8">
+                <svg width="200" height="100" viewBox="0 0 200 100">
+                    <path d="M20,90 A80,80 0 0,1 180,90" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="12"
+                        stroke-linecap="round"></path>
+                    <path d="M20,90 A80,80 0 0,1 160,50" fill="none" stroke="#FFD15C" stroke-width="12"
+                        stroke-linecap="round" stroke-dasharray="210" stroke-dashoffset="50"></path>
+                </svg>
+                <div class="absolute bottom-0 text-center">
+                    <div class="text-3xl font-bold">5 235</div>
+                    <p class="text-[10px] text-gx-muted">Institutional holders <br> 69% of total shares</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:col-span-4 bento-card space-y-6">
+            <div class="flex justify-between items-center text-xs">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="bar-chart" class="text-gx-green" size="18"></i>
+                    <span>Analyst Ratings</span>
+                </div>
+                <i data-lucide="calendar" size="14" class="text-gx-muted"></i>
+            </div>
+            <div class="flex items-end justify-between h-32 gap-3 px-2">
+                <div class="flex-1 bg-gx-green h-[40%] rounded-sm"></div>
+                <div class="flex-1 bg-gx-yellow h-[60%] rounded-sm"></div>
+                <div class="flex-1 bg-gx-red h-[30%] rounded-sm"></div>
+                <div class="flex-1 bg-gx-green h-[70%] rounded-sm"></div>
+                <div class="flex-1 bg-gx-yellow h-[50%] rounded-sm"></div>
+            </div>
+            <div class="flex justify-between text-[10px] font-bold">
+                <span class="text-gx-green">Strong Buy</span>
+                <span class="text-gx-muted">Aggregated View</span>
+            </div>
+        </div>
+
+        <div class="md:col-span-5 bento-card space-y-6">
+            <div class="flex justify-between items-center text-xs">
+                <div class="flex items-center gap-2"><i data-lucide="activity" class="text-gx-green" size="18"></i>
+                    <span>Long/Short Ratio</span></div>
+                <i data-lucide="calendar" size="14" class="text-gx-muted"></i>
+            </div>
+            <div class="h-40 relative">
+                <svg viewBox="0 0 500 200" class="w-full h-full">
+                    <path d="M0,100 Q100,20 200,80 T400,100 T500,60" fill="none" stroke="#BCE45E" stroke-width="2">
+                    </path>
+                    <path d="M0,100 Q100,180 300,160 T500,130" fill="none" stroke="#FF5C5C" stroke-width="2"></path>
+                </svg>
+                <div
+                    class="absolute right-4 top-4 bg-black/40 backdrop-blur-md p-2 rounded-lg text-[10px] border border-gx-border">
+                    <span class="text-gx-yellow font-bold">Live Data</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="md:col-span-12 bento-card">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="font-bold">Recent Positions</h3>
+                <div class="flex bg-gx-bg rounded-lg p-1 gap-2 border border-gx-border">
+                    <button
+                        class="bg-white text-black px-4 py-1.5 rounded-lg text-xs font-bold transition-all">Active</button>
+                    <button
+                        class="text-gx-muted px-4 py-1.5 text-xs font-medium hover:text-white transition-all">History</button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs min-w-[800px]">
+                    <thead>
+                        <tr class="text-gx-muted border-b border-gx-border">
+                            <th class="pb-4">Date</th>
+                            <th class="pb-4">Ticker</th>
+                            <th class="pb-4">Type</th>
+                            <th class="pb-4">Side</th>
+                            <th class="pb-4">Qty</th>
+                            <th class="pb-4">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gx-border">
+                        <tr class="hover:bg-white/5 transition-all">
+                            <td class="py-6">2025-02-21</td>
+                            <td class="font-bold py-6 flex items-center gap-2"><img
+                                    src="https://logo.clearbit.com/nvidia.com" class="w-4 h-4 rounded-full"> NVDA</td>
+                            <td>Futures</td>
+                            <td class="text-gx-green">Long</td>
+                            <td>5</td>
+                            <td><span class="text-gx-green bg-gx-green/10 px-3 py-1 rounded">Open</span></td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-all">
+                            <td class="py-6">2025-02-19</td>
+                            <td class="font-bold py-6 flex items-center gap-2"><img
+                                    src="https://logo.clearbit.com/nvidia.com" class="w-4 h-4 rounded-full"> NVDA</td>
+                            <td>Futures</td>
+                            <td class="text-gx-red">Short</td>
+                            <td>5</td>
+                            <td><span class="text-gx-green bg-gx-green/10 px-3 py-1 rounded">Open</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- [TAB CONTENT: ANALYTICS] -->
+    <main id="tab-analytics"
+        class="tab-content hidden max-w-[1800px] mx-auto opacity-0 transition-opacity duration-300">
+        <div class="bento-card text-center py-60">
+            <i data-lucide="bar-chart-2" size="64" class="mx-auto mb-6 text-gx-green opacity-20"></i>
+            <h2 class="text-4xl font-bold mb-4">Deep Analytics</h2>
+            <p class="text-gx-muted max-w-md mx-auto">Sistem sedang memproses data institutional terbaru untuk
+                memberikan Anda pandangan pasar yang lebih mendalam.</p>
+        </div>
+    </main>
+
+    <!-- [TAB CONTENT: TRANSACTIONS] -->
+    <main id="tab-transactions"
+        class="tab-content hidden max-w-[1800px] mx-auto opacity-0 transition-opacity duration-300">
+        <div class="bento-card text-center py-60">
+            <i data-lucide="repeat" size="64" class="mx-auto mb-6 text-gx-yellow opacity-20"></i>
+            <h2 class="text-4xl font-bold mb-4">Transactions</h2>
+            <p class="text-gx-muted max-w-md mx-auto">Kami sedang memuat histori transaksi lengkap Anda. Silakan tunggu
+                sebentar.</p>
+        </div>
+    </main>
+
+    <!-- [TAB CONTENT: PAYMENT] -->
+    <main id="tab-payment" class="tab-content hidden max-w-[1800px] mx-auto opacity-0 transition-opacity duration-300">
+        <div class="bento-card max-w-2xl mx-auto mt-20 p-12">
+            <h2 class="text-3xl font-bold mb-10 text-center">Payment & Cards</h2>
+            <div class="space-y-6">
+                <div
+                    class="bg-gx-bg border border-gx-border p-6 rounded-3xl flex justify-between items-center group cursor-pointer hover:border-white/20 transition-all">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-10 bg-gx-red rounded-lg flex items-center justify-center font-bold text-sm">
+                            VISA</div>
+                        <div>
+                            <p class="font-bold">Main Debit Card</p>
+                            <p class="text-gx-muted text-xs">**** **** **** 4242</p>
+                        </div>
+                    </div>
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-gx-green group-hover:text-black transition-all">
+                        <i data-lucide="check" size="18"></i>
+                    </div>
+                </div>
+                <button
+                    class="w-full py-6 border border-dashed border-gx-muted rounded-3xl text-gx-muted text-sm font-bold hover:text-white hover:border-white transition-all">
+                    + Link New Payment Method
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <a href="../../index.html"
+        class="fixed bottom-10 right-10 bg-white text-black px-6 py-3 rounded-full text-xs font-bold flex items-center gap-2 shadow-2xl z-50">
+        <i data-lucide="arrow-left" size="16"></i> Lab Launcher
+    </a>
+
+    <script>
+        lucide.createIcons();
+
+        // Single-Page Tab Switching Mechanism
+        const tabs = document.querySelectorAll('[data-tab]');
+        const screens = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+
+                // 1. Reset Buttons
+                tabs.forEach(t => {
+                    t.classList.remove('bg-white', 'text-black', 'active');
+                    t.classList.add('text-gx-muted');
+                });
+
+                // 2. Set Active Button
+                tab.classList.remove('text-gx-muted');
+                tab.classList.add('bg-white', 'text-black', 'active');
+
+                // 3. Switch Screens
+                screens.forEach(s => {
+                    s.classList.add('hidden');
+                    s.style.opacity = '0';
+                    if (s.id === `tab-${target}`) {
+                        s.classList.remove('hidden');
+                        setTimeout(() => s.style.opacity = '1', 10);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

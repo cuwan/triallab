@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdul Aziz | Premium Motion Designer & Contributor</title>
+    <meta name="description"
+        content="High-fidelity motion design and brand engagement systems by Abdul Aziz. Professional contributor for Envato Elements, Creative Market, and UI8.">
+
+    <!-- Typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-card: #0F0F12;
+            --accent-primary: #8B5CF6;
+            /* Vibrant Purple */
+            --accent-secondary: #D946EF;
+            /* Pink-ish */
+            --accent-gold: #F59E0B;
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* --- BACKGROUND BLOBS --- */
+        .blob-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            filter: blur(100px);
+            opacity: 0.6;
+        }
+
+        .blob {
+            position: absolute;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
+        }
+
+        .blob-1 {
+            background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+            top: -10%;
+            left: -10%;
+        }
+
+        .blob-2 {
+            background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -5s;
+        }
+
+        @keyframes move {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(10%, 10%) scale(1.2);
+            }
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: var(--transition-smooth);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- HERO --- */
+        section {
+            padding: 140px 10%;
+            position: relative;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-tagline {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 100px);
+            line-height: 1;
+            margin-bottom: 30px;
+            background: linear-gradient(to bottom, #fff 40%, rgba(255, 255, 255, 0.4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 1000px;
+        }
+
+        .hero p {
+            font-size: clamp(18px, 2vw, 24px);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: #fff;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass-bg);
+            border-color: #fff;
+        }
+
+        /* --- STATS / CLIENT PERSUASION --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 80px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-10px);
+        }
+
+        .stat-card h3 {
+            font-size: 48px;
+            color: var(--accent-primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* --- QUALITY PITCH --- */
+        .pitch-section {
+            background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.05), transparent);
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        .pitch-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .pitch-card {
+            padding: 40px;
+            border-radius: 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .pitch-card:hover {
+            background: #141418;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+        }
+
+        .pitch-card h3 {
+            font-size: 24px;
+        }
+
+        .pitch-card p {
+            color: var(--text-secondary);
+        }
+
+        /* --- THE "NOT KALENG-KALENG" BADGE --- */
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #111, #222);
+            padding: 15px 30px;
+            border-radius: 100px;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-top: 40px;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+        }
+
+        /* --- MARKETPLACE FOCUS --- */
+        .marketplaces {
+            text-align: center;
+        }
+
+        .market-logos {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            opacity: 0.6;
+        }
+
+        .market-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #fff;
+            filter: grayscale(1);
+            transition: 0.3s;
+        }
+
+        .market-item:hover {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+        /* --- PORTFOLIO GRID --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: #111;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+            opacity: 0.7;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+            opacity: 0.4;
+        }
+
+        .portfolio-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .portfolio-item:hover .portfolio-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* --- CONTACT --- */
+        .cta-box {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            padding: 80px;
+            border-radius: 40px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box h2 {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+        .cta-box p {
+            margin-bottom: 40px;
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-white {
+            background: #fff;
+            color: var(--accent-primary);
+            padding: 20px 50px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 18px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 60px 10%;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .socials a {
+            color: var(--text-secondary);
+            transition: 0.3s;
+        }
+
+        .socials a:hover {
+            color: #fff;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        [data-aos] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-aos].appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 100px 20px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .pitch-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-box {
+                padding: 40px 20px;
+            }
+
+            .cta-box h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <nav>
+        <div class="logo">ABDUL AZIZ.</div>
+        <div class="nav-links">
+            <a href="#work">Work</a>
+            <a href="#excellence">Excellence</a>
+            <a href="#marketplaces">Marketplaces</a>
+            <a href="#about">About</a>
+        </div>
+        <a href="#contact" class="nav-cta">GET STARTED</a>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-tagline">PREMIUM MOTION PARTNER</div>
+            <h1>Motion that Scales Brands beyond Limits.</h1>
+            <p>I help high-growth brands and microstock platforms dominate their market with high-fidelity motion
+                systems that command attention and drive conversion.</p>
+            <div class="hero-btns">
+                <a href="#work" class="btn-primary">View My Work <i data-lucide="arrow-right" size="18"></i></a>
+                <a href="#contact" class="btn-secondary">Let's Connect</a>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>200+</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-card">
+                    <h3>4.9/5</h3>
+                    <p>Client Satisfaction</p>
+                </div>
+                <div class="stat-card">
+                    <h3>3M+</h3>
+                    <p>Exposure Reached</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Excellence Section (Persuasion) -->
+        <section id="excellence" class="pitch-section">
+            <div class="section-header">
+                <h2>Why My Motion Design is Your Growth Catalyst.</h2>
+                <p>Generic motion design is noise. Premium motion design is a strategy. Here is why working with me
+                    changes the game.</p>
+            </div>
+
+            <div class="pitch-grid">
+                <div class="pitch-card" data-aos>
+                    <div class="icon-box"><i data-lucide="zap"></i></div>
+                    <h3>Peak Engagement</h3>
+                    <p>I don't just "move things." I use psychology-driven easing and timing to grab the human eye and
+                        hold it until the message is delivered. Higher engagement leads to higher brand recall.</p>
+                </div>
+                <div class="pitch-card" data-aos>
+                    <div class="icon-box"><i data-lucide="award"></i></div>
+                    <h3>Contributor-Grade Quality</h3>
+                    <p>My quality standards are built for platforms like UI8 and Envato Elements. This means
+                        pixel-perfect alignment, optimized file weights, and smooth transitions that scream "Premium."
+                    </p>
+                </div>
+                <div class="pitch-card" data-aos>
+                    <div class="icon-box"><i data-lucide="trending-up"></i></div>
+                    <h3>Market Dominance</h3>
+                    <p>For microstock platforms: My work is designed to trend. By focusing on aesthetics that are "Not
+                        Kaleng-Kaleng" (Not Cheesy), I ensure your assets gain massive exposure and downloads.</p>
+                </div>
+                <div class="pitch-card" data-aos>
+                    <div class="icon-box"><i data-lucide="shield-check"></i></div>
+                    <h3>Technical Excellence</h3>
+                    <p>From Lottie animations to complex 3D renders, my technical workflow ensures that the motion looks
+                        equally stunning on a mobile browser and a 4K display.</p>
+                </div>
+            </div>
+
+            <div class="premium-badge">
+                <i data-lucide="sparkles"></i> High-Fidelity Standards: Quality that Scales.
+            </div>
+        </section>
+
+        <!-- Technical Stack -->
+        <section id="stack"
+            style="background: rgba(255,255,255,0.02); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+            <div class="section-header" style="text-align: center;">
+                <h2>Mastering the Industry Standard.</h2>
+                <p style="margin-left: auto; margin-right: auto;">I use the most advanced tools to ensure your motion is
+                    not only beautiful but also performant and scalable.</p>
+            </div>
+            <div class="market-logos" style="opacity: 0.8; filter: none;">
+                <div class="market-item"><i data-lucide="monitor"></i> After Effects</div>
+                <div class="market-item"><i data-lucide="box"></i> Cinema 4D / Spline</div>
+                <div class="market-item"><i data-lucide="code-2"></i> Lottie / Rive</div>
+                <div class="market-item"><i data-lucide="layers"></i> Figma Motion</div>
+            </div>
+        </section>
+
+        <!-- Marketplace Focus Section (The "Hire Me as Contributor" Pitch) -->
+        <section id="marketplaces" class="marketplaces">
+            <div class="section-header">
+                <h2 style="max-width: 800px; margin-left: auto; margin-right: auto;">Accepted on the World's Best
+                    Creative Marketplaces.</h2>
+                <p style="margin-left: auto; margin-right: auto;">I am currently specializing in creating assets that
+                    pass the rigorous quality control of elite platforms.</p>
+            </div>
+
+            <div class="market-logos">
+                <div class="market-item">
+                    <i data-lucide="layout"></i> UI8
+                </div>
+                <div class="market-item">
+                    <i data-lucide="layers"></i> ENVATO ELEMENTS
+                </div>
+                <div class="market-item">
+                    <i data-lucide="shopping-bag"></i> CREATIVE MARKET
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto; text-align: left; background: var(--glass-bg); padding: 40px; border-radius: 20px; border: 1px solid var(--glass-border);">
+                <h4 style="color: var(--accent-primary); margin-bottom: 15px;">A Message for Creative Curators:</h4>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    I understand that your platform thrives on <strong>Exclusivity and Quality</strong>. My motion
+                    assets are meticulously crafted to provide maximum value to users—highly customizable,
+                    performance-optimized, and visually stunning. By accepting me as a contributor, you are not just
+                    getting another designer; you are gaining a dedicated partner committed to elevating the visual
+                    standard of your marketplace.
+                </p>
+            </div>
+        </section>
+
+        <!-- Portfolio Showcase -->
+        <section id="work">
+            <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                    <h2>Selected Works</h2>
+                    <p>A glimpse into high-fidelity motion systems and experimental designs.</p>
+                </div>
+                <a href="#" style="color: var(--accent-primary); font-weight: 700; text-decoration: none;">View All
+                    Projects &rarr;</a>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-aos>
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"
+                        alt="Work 1">
+                    <div class="portfolio-info">
+                        <h3>Abstract Motion System</h3>
+                        <p>Branding • Animation</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-aos>
+                    <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=800"
+                        alt="Work 2">
+                    <div class="portfolio-info">
+                        <h3>UI Motion Kit</h3>
+                        <p>Product • UI8 Submission</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-aos>
+                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=800"
+                        alt="Work 3">
+                    <div class="portfolio-info">
+                        <h3>Dynamic Brand Ident</h3>
+                        <p>Identity • Creative Market</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me -->
+        <section id="about" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+            <div style="position: relative;">
+                <div
+                    style="width: 100%; aspect-ratio: 1; background: linear-gradient(45deg, #222, #111); border-radius: 40px; overflow: hidden; border: 1px solid var(--glass-border);">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800"
+                        style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: grayscale(1);"
+                        alt="Abdul Aziz">
+                </div>
+                <div
+                    style="position: absolute; -bottom: 20px; -right: 20px; background: var(--bg-dark); padding: 20px; border-radius: 20px; border: 1px solid var(--accent-primary);">
+                    <p style="font-weight: 800; color: var(--accent-primary);">Yogyakarta, ID</p>
+                </div>
+            </div>
+            <div>
+                <h2 style="font-size: 56px; margin-bottom: 30px;">I'm Abdul Aziz.</h2>
+                <p style="font-size: 20px; color: var(--text-secondary); margin-bottom: 30px;">
+                    Based in the vibrant creative hub of Yogyakarta, Indonesia, I bridge the gap between artistic motion
+                    and business conversion.
+                </p>
+                <p style="color: var(--text-secondary); margin-bottom: 40px;">
+                    With years of experience in the digital asset industry, I have mastered the art of creating motion
+                    that doesn't just look "cool"—it works. Whether it's for a high-end fintech brand or a globally
+                    distributed UI kit, my focus remains the same: <strong>Visual Excellence and Technical
+                        Integrity.</strong>
+                </p>
+                <div class="socials">
+                    <a href="#"><i data-lucide="instagram"></i></a>
+                    <a href="#"><i data-lucide="behance"></i></a>
+                    <a href="#"><i data-lucide="dribbble"></i></a>
+                    <a href="#"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section id="contact">
+            <div class="cta-box">
+                <h2>Ready to elevate your brand's motion?</h2>
+                <p>I am always open to new collaborative projects and marketplace opportunities. Let's make something
+                    legendary.</p>
+                <a href="mailto:aziz@example.com" class="btn-white">LET'S START A PROJECT</a>
+
+                <div
+                    style="margin-top: 40px; display: flex; justify-content: center; gap: 40px; font-size: 14px; font-weight: 700; opacity: 0.8;">
+                    <span><i data-lucide="check-circle" style="vertical-align: middle; margin-right: 5px;"
+                            size="16"></i> AVAILABLE FOR COMMISSIONS</span>
+                    <span><i data-lucide="check-circle" style="vertical-align: middle; margin-right: 5px;"
+                            size="16"></i> READY FOR CONTRIBUTORSHIP</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>&copy; 2026 Abdul Aziz. Motion Designer based in Indonesia.</div>
+        <div class="socials">
+            <a href="#">Instagram</a>
+            <a href="#">Dribbble</a>
+            <a href="#">Behance</a>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Scroll Reveal Animation (AOS implementation)
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Parallax Blobs
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            document.querySelector('.blob-1').style.transform = `translate(${x * 50}px, ${y * 50}px)`;
+            document.querySelector('.blob-2').style.transform = `translate(${x * -50}px, ${y * -50}px)`;
+        });
+    </script>
+</body>
+
+</html>
