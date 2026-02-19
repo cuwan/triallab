@@ -165,12 +165,30 @@
             line-height: 1.6;
         }
 
+        .card-progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 100px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .card-progress-bar {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
         .card-stats {
             display: flex;
             gap: 12px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
             margin-top: auto;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .stat-badge {
@@ -230,6 +248,79 @@
             margin-bottom: 16px;
         }
 
+        /* Checklist System */
+        .checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .checklist-item:hover {
+            background: rgba(34, 197, 94, 0.05);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        .checklist-item.completed {
+            opacity: 0.5;
+            text-decoration: line-through;
+            border-color: transparent;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .checkbox i {
+            display: none;
+        }
+
+        .completed .checkbox {
+            background: var(--accent);
+        }
+
+        .completed .checkbox i {
+            display: block;
+            color: #000;
+        }
+
+        .add-task-input {
+            width: 100%;
+            background: transparent;
+            border: 2px dashed var(--border);
+            color: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            font-family: inherit;
+            margin-top: 12px;
+            transition: 0.2s;
+        }
+
+        .add-task-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
         .prompt-box {
             background: #000;
             border: 1px solid var(--border);
@@ -260,33 +351,82 @@
             display: none !important;
         }
 
-        /* Time Mgmt */
+        /* Daily Planner */
         .schedule-grid {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .day-box {
             background: var(--card);
             border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 16px;
+            padding: 24px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
         }
 
         .day-name {
             font-weight: 800;
             color: var(--accent);
-            margin-bottom: 12px;
-            display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
         }
 
-        .task-item {
-            font-size: 12px;
+        .day-progress {
+            font-size: 11px;
+            font-family: 'JetBrains Mono', monospace;
             color: var(--text-dim);
-            margin-bottom: 8px;
+        }
+
+        .task-list {
             display: flex;
+            flex-direction: column;
             gap: 8px;
+        }
+
+        .task-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .task-row:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .task-row.done {
+            text-decoration: line-through;
+            opacity: 0.4;
+        }
+
+        .mini-checkbox {
+            width: 14px;
+            height: 14px;
+            border: 1.5px solid var(--accent);
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .done .mini-checkbox {
+            background: var(--accent);
         }
     </style>
 </head>
@@ -302,12 +442,12 @@
 
     <div class="wrapper">
         <aside>
-            <div class="brand"><i data-lucide="zap"></i> WEALTH SYTEM</div>
+            <div class="brand"><i data-lucide="zap"></i> WEALTH SYSTEM</div>
             <nav>
                 <button onclick="showPage('roadmap')" class="nav-link active" id="btn-roadmap"><i data-lucide="map"></i>
                     Roadmap</button>
                 <button onclick="showPage('schedule')" class="nav-link" id="btn-schedule"><i data-lucide="calendar"></i>
-                    Time Mgmt</button>
+                    Daily Planner</button>
                 <button onclick="showPage('prompts')" class="nav-link" id="btn-prompts"><i data-lucide="terminal"></i>
                     Prompts Hub</button>
             </nav>
@@ -322,130 +462,20 @@
                 <div class="section-header">
                     <div>
                         <h1>The $10K Masterplan</h1>
-                        <p style="color: var(--text-dim);">Sistem Terpadu Brainstorming AI</p>
+                        <p style="color: var(--text-dim);">Sistem Terpadu Brainstorming AI & Tracking</p>
                     </div>
                 </div>
 
-                <!-- Phase 1 -->
-                <section class="phase-section">
-                    <div class="phase-label">
-                        <h2>Phase 1: Sprint (0-3 Months)</h2>
-                    </div>
-                    <div class="options-grid">
-                        <div class="card" onclick="openDetails('motion_graphics')">
-                            <i data-lucide="film" class="card-icon"></i>
-                            <h3>Video Motion Graphics</h3>
-                            <p>Motion grafis abstrak fokus pada BG, pattern, dan lettering untuk stock market.</p>
-                            <div class="card-stats"><span class="stat-badge">PRIORITY 1</span><span
-                                    class="stat-badge">Creative</span></div>
-                        </div>
-                        <div class="card" onclick="openDetails('mockup_templates')">
-                            <i data-lucide="monitor" class="card-icon"></i>
-                            <h3>Mockup Mastery (Freepik)</h3>
-                            <p>Mockup fotorealistik dengan implementasi clean di kehidupan sehari-hari.</p>
-                            <div class="card-stats"><span class="stat-badge">PRIORITY 2</span><span
-                                    class="stat-badge">Clean</span></div>
-                        </div>
-                        <div class="card" onclick="openDetails('agency')">
-                            <i data-lucide="layout" class="card-icon"></i>
-                            <h3>AI-Framer Agency</h3>
-                            <p>Jual High-Ticket Web Design menggunakan AI & Framer.</p>
-                            <div class="card-stats"><span class="stat-badge">PRIORITY 3</span><span
-                                    class="stat-badge">Skill: Med</span></div>
-                        </div>
-                        <div class="card" onclick="openDetails('media')">
-                            <i data-lucide="video" class="card-icon"></i>
-                            <h3>Media Empire</h3>
-                            <p>Automated YouTube/TikTok shorts scaling.</p>
-                            <div class="card-stats"><span class="stat-badge">PRIORITY 4</span><span
-                                    class="stat-badge">Skill: Low</span></div>
-                        </div>
-                        <div class="card" onclick="openDetails('nextjs_templates')">
-                            <i data-lucide="code" class="card-icon"></i>
-                            <h3>Next.js Turbo Templates</h3>
-                            <p>Template website siap pakai untuk startup dan UMKM dengan performa maksimal.</p>
-                            <div class="card-stats"><span class="stat-badge">PRIORITY 5</span><span
-                                    class="stat-badge">Ready to Use</span></div>
-                        </div>
-                        <div class="card" onclick="openDetails('seo_content')">
-                            <i data-lucide="search" class="card-icon"></i>
-                            <h3>AI SEO & Content Strategist</h3>
-                            <p>Dominasi Google dengan Content Factory berbasis AI.</p>
-                            <div class="card-stats"><span class="stat-badge">PRIORITY 6</span><span
-                                    class="stat-badge">High Demand</span></div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Phase 2 -->
-                <section class="phase-section">
-                    <div class="phase-label">
-                        <h2 style="color: var(--gold);">Phase 2: Scale (6-12 Months)</h2>
-                    </div>
-                    <div class="options-grid">
-                        <div class="card" onclick="openDetails('marketplace')">
-                            <i data-lucide="box" class="card-icon"></i>
-                            <h3>Digital Marketplace</h3>
-                            <p>Produksi aset digital massal (Mockups, Icons).</p>
-                        </div>
-                        <div class="card" onclick="openDetails('framer_templates')">
-                            <i data-lucide="layout-template" class="card-icon"></i>
-                            <h3>Framer Template Store</h3>
-                            <p>Membangun toko template Framer premium menggunakan bantuan AI coding.</p>
-                            <div class="card-stats"><span class="stat-badge">NEW</span></div>
-                        </div>
-                        <div class="card" onclick="openDetails('newsletter')">
-                            <i data-lucide="mail" class="card-icon"></i>
-                            <h3>Premium Newsletter</h3>
-                            <p>Berlangganan kurasi AI insight di industri tertentu.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Phase 3 -->
-                <section class="phase-section">
-                    <div class="phase-label">
-                        <h2 style="color: var(--purple);">Phase 3: Wealth (1-5 Years)</h2>
-                    </div>
-                    <div class="options-grid">
-                        <div class="card" onclick="openDetails('saas')">
-                            <i data-lucide="code" class="card-icon"></i>
-                            <h3>Micro SaaS</h3>
-                            <p>Membangun software solusi spesifik berbasis API AI.</p>
-                        </div>
-                        <div class="card" onclick="openDetails('vc')">
-                            <i data-lucide="trending-up" class="card-icon"></i>
-                            <h3>AI VC</h3>
-                            <p>Investasi pada startup AI tahap awal (Pre-seed).</p>
-                        </div>
-                        <div class="card" onclick="openDetails('custom_gpts')">
-                            <i data-lucide="bot" class="card-icon"></i>
-                            <h3>Custom GPTs Store</h3>
-                            <p>Membangun ekosistem GPTs spesifik untuk korporat.</p>
-                        </div>
-                        <div class="card" onclick="openDetails('automation_platform')">
-                            <i data-lucide="network" class="card-icon"></i>
-                            <h3>Automation Platform</h3>
-                            <p>Platform integrasi khusus untuk industri tertentu.</p>
-                        </div>
-                        <div class="card" onclick="openDetails('ai_branding')">
-                            <i data-lucide="fingerprint" class="card-icon"></i>
-                            <h3>AI Branding House</h3>
-                            <p>Agensi branding yang menggunakan AI dari hulu ke hilir.</p>
-                        </div>
-                        <div class="card" onclick="openDetails('edge_compute')">
-                            <i data-lucide="server" class="card-icon"></i>
-                            <h3>Edge Compute Estate</h3>
-                            <p>Investasi di infrastruktur pemrosesan AI lokal.</p>
-                        </div>
-                    </div>
-                </section>
+                <div id="roadmap-container">
+                    <!-- Phases Injected Here -->
+                </div>
             </div>
 
             <!-- SCHEDULE PAGE -->
             <div id="page-schedule" class="hidden">
                 <div class="section-header">
-                    <h1>Time Management System</h1>
+                    <h1>Daily Multiplier Planner</h1>
+                    <p style="color: var(--text-dim);">Track ritual harian Anda untuk mencapai target $10K.</p>
                 </div>
                 <div class="schedule-grid" id="schedule-container">
                     <!-- JS Injected -->
@@ -463,73 +493,41 @@
     </div>
 
     <script>
-        const details = {
-            agency: {
-                title: "AI-Framer Agency",
-                icon: "layout",
-                desc: "Jual output setara studio besar dengan kecepatan gila. <br><b>Standout Strategy:</b> Fokus pada 'Interactive Investment Decks' bukan hanya landing page biasa.",
-                sweetSpot: "Target: Founders di bidang <b>Climate-Tech atau Biotech</b> yang butuh memvisualisasikan data kompleks ke investor. Mereka punya budget besar dan butuh estetika 'Sci-Fi' yang bisa dibuat cepat dengan AI + Framer.",
-                steps: ["Buat 3 case study visualisasi data medis/lingkungan", "Outreach ke VC-backed startups di London/SF", "Pricing: $5,000 per pitch-deck site"],
-                prompts: ["Analyze the visual language of high-end medical research sites. Suggest a color palette and layout that conveys both 'Scientific Credibility' and 'Futuristic Innovation'."],
-                tools: ["Framer", "Claude", "Cursor"]
+        // DATA DEFINITION
+        const roadmapData = [
+            {
+                phase: "Phase 1: Sprint (0-3 Months)",
+                color: "var(--accent)",
+                projects: [
+                    { id: 'motion_graphics', title: "Video Motion Graphics", icon: "film", desc: "Motion grafis abstrak fokus pada BG, pattern, dan lettering untuk stock market.", priority: 1, tag: "Creative", steps: ["Generate textures via AI", "Animate in After Effects/Remotion", "Export as ProRes 422 for Stock Approval"] },
+                    { id: 'mockup_templates', title: "Mockup Mastery (Freepik)", icon: "monitor", desc: "Mockup fotorealistik dengan implementasi clean di kehidupan sehari-hari.", priority: 2, tag: "Clean", steps: ["Generate raw scene via Midjourney", "Masking & Smart Object di Photoshop", "Upload meta-tags spesifik Freepik"] },
+                    { id: 'agency', title: "AI-Framer Agency", icon: "layout", desc: "Jual High-Ticket Web Design menggunakan AI & Framer.", priority: 3, tag: "High-Ticket", steps: ["Buat 3 case study visualisasi data medis", "Outreach ke startups di London/SF", "Pricing: $5,000 per pitch-deck site"] },
+                    { id: 'media', title: "Media Empire", icon: "video", desc: "Automated YouTube/TikTok shorts scaling.", priority: 4, tag: "Passive", steps: ["Setup naskah teknis via Perplexity", "Visualisasi mesin 3D via Leonardo", "Target Adsense High CPM"] },
+                    { id: 'nextjs_templates', title: "Next.js Turbo Templates", icon: "code", desc: "Template website siap pakai untuk startup dan UMKM.", priority: 5, tag: "SaaS Starter", steps: ["Build core components dengan Shadcn UI", "Integrasi AI copy & images", "Packaged for Sale"] },
+                    { id: 'seo_content', title: "AI SEO Content", icon: "search", desc: "Dominasi Google dengan Content Factory berbasis AI.", priority: 6, tag: "High Demand", steps: ["Identify low-difficulty keywords", "Setup dataset via Scraping", "Bulk publish 100+ pages/mo"] }
+                ]
             },
-            media: {
-                title: "Media Empire",
-                icon: "video",
-                desc: "Automasi konten video viral tanpa wajah.",
-                sweetSpot: "Target: <b>'Industrial B2B' Tech</b> (misal: Logistik pergudangan atau Robotika manufaktur). Jangan buat konten motivasi (terlalu banyak saingan). Buat konten edukasi alat berat/teknis yang menarik untuk market US/Jerman.",
-                steps: ["Setup naskah teknis via Perplexity", "Visualisasi mesin 3D via Leonardo.ai", "Target Adsense High CPM (Tech Industry)"],
-                prompts: ["Write a 60-second viral breakdown script about 'The future of autonomous forklifts in mega-warehouses'. Use a professional but exciting tone."],
-                tools: ["InVideo", "ElevenLabs"]
+            {
+                phase: "Phase 2: Scale (6-12 Months)",
+                color: "var(--gold)",
+                projects: [
+                    { id: 'marketplace', title: "Digital Marketplace", icon: "box", desc: "Produksi aset digital massal (Mockups, Icons).", steps: ["Market Research UI8", "Multi-format export", "Global launch"] },
+                    { id: 'framer_templates', title: "Framer Template Store", icon: "layout-template", desc: "Membangun toko template Framer premium.", steps: ["Modern grid layouts", "Dark mode optimization", "SEO meta tagging"] },
+                    { id: 'newsletter', title: "Premium Newsletter", icon: "mail", desc: "Berlangganan kurasi AI insight eksklusif.", steps: ["Niche selection", "AI Curation setup", "Paid subscription model"] }
+                ]
             },
-            nextjs_templates: {
-                title: "Next.js Turbo Templates",
-                icon: "code",
-                desc: "Template website siap pakai untuk startup dan UMKM yang mengejar performa dan SEO.",
-                sweetSpot: "Target: <b>Developer yang butuh 'Bento Grid Dashboard' atau 'SaaS Landing Page'</b>. Jangan buat template generik. Masukkan fitur Auth (Clerk) dan Database (Supabase) yang sudah terkonfigurasi. Jual di LemonSqueezy atau Gumroad.",
-                steps: ["Build core components dengan Shadcn UI", "Integrasi AI copy & images", "Packaged for Sale (Starter Kits)"],
-                prompts: ["Generate a modern bento-style dashboard architecture using React and Tailwind. Focus on glassmorphism, clean spacing, and dark mode aesthetics."],
-                tools: ["Next.js", "Shadcn UI", "Supabase"]
-            },
-            motion_graphics: {
-                title: "Video Motion Graphics",
-                icon: "film",
-                desc: "Motion grafis abstrak berkualitas 4K dengan fokus pada background dinamis, pattern unik, dan lettering premium.",
-                sweetSpot: "Target: <b>Kontributor Adobe Stock & Envato Elements</b>. Fokus pada 'Looping Backgrounds' (BG), 'Dynamic Patterns', dan 'Premium Lettering' yang dicari editor profesional untuk kebutuhan komersial.",
-                steps: ["Generate textures via AI", "Animate in After Effects/Remotion", "Export as ProRes 422 for Stock Approval"],
-                prompts: ["Hypnotic abstract liquid gold textures, organic motion, metallic sheen, 4k loopable, luxury aesthetic --v 6.0"],
-                tools: ["After Effects", "Midjourney", "Luma Dream Machine"]
-            },
-            seo_content: {
-                title: "AI SEO & Content Strategist",
-                icon: "search",
-                desc: "Dominasi Google dengan Content Factory. Menggunakan AI untuk riset keyword, pembuatan brief, hingga penulisan artikel.",
-                sweetSpot: "Target: <b>Programmatic SEO untuk Niche SaaS Mikro</b> (misal: 'Best X for Y' comparisons). Jangan tulis blog gaya bebas. Gunakan data untuk membuat ribuan halaman spesifik secara otomatis.",
-                steps: ["Identify low-difficulty keyword clusters", "Setup dataset via AI Scraping", "Bulk publish 100+ pages per month"],
-                prompts: ["Acting as a data-driven SEO, suggest 50 long-tail keywords for the niche '[Niche]' that have high buying intent but low competition."],
-                tools: ["Perplexity", "SurferSEO"]
-            },
-            mockup_templates: {
-                title: "Mockup Mastery (Freepik)",
-                icon: "monitor",
-                desc: "Produksi mockup fotorealistik berkualitas tinggi untuk branding dan marketing brand, UMKM maupun corporate.",
-                sweetSpot: "Target: <b>Implementasi 'Daily Life' (Clean)</b>. Misalnya mockup laptop sedang di atas meja kerja yang estetik atau billboard di lingkungan realistik. Fokus pada estetika yang nyata, bukan sekadar tempelan di background putih.",
-                steps: ["Generate raw scene via Midjourney (Scene Realistic)", "Masking & Smart Object di Photoshop", "Upload meta-tags spesifik Freepik"],
-                prompts: ["Photorealistic MacBook Pro on a minimalist oak desk, large window with soft sunlight, aesthetic coffee cup, high-end interior design, 8k --ar 16:9 --v 6.0"],
-                tools: ["Midjourney", "Photoshop", "Magnific AI"]
-            },
-            marketplace: { title: "Digital Marketplace", icon: "box", desc: "Jualan aset digital skala global di platform seperti UI8 atau Creative Market.", steps: ["Generate aset dengan Midjourney", "Upscale dengan Magnific", "Upload ke Creative Market"], prompts: ["Professional minimalist perfume bottle mockup, soft studio lighting, high texture detail --v 6.0"] },
-            newsletter: { title: "Premium Newsletter", icon: "mail", desc: "Berlangganan kurasi AI insight. Menjual akses informasi ke industri eksklusif.", steps: ["Setup Beehiiv", "Automasi riset via Perplexity", "Promosi di LinkedIn"], prompts: ["Summarize 10 berita AI tercanggih minggu ini dan berikan opini tajam tentang dampaknya bagi industri kreatif."] },
-            framer_templates: { title: "Framer Template Store", icon: "layout-template", desc: "Bangun toko template premium. Manfaatkan skill Framer Anda untuk pasif income.", steps: ["Desain Master Template", "Konversi ke Framer", "Submit ke Marketplace"], prompts: ["Generate layout website modern untuk bento grid dashboard dengan skema warna dark mode dan border hijau."] },
-            saas: { title: "Micro SaaS", icon: "code", desc: "Software solusi spesifik skala kecil.", steps: ["Cari niche API", "Frontend dengan v0.dev", "Deploy di Vercel"], prompts: ["Tulis kode landing page minimalis menggunakan React dan Tailwind untuk aplikasi AI text editor."] },
-            vc: { title: "AI VC", icon: "trending-up", desc: "Investor startup AI tahap awal.", steps: ["Kumpul modal dari profit", "Riset startup AI awal", "Investasi ekuitas"], prompts: ["Berikan daftar startup AI yang baru mendapatkan Seed funding di kawasan Asia Pasifik."] },
-            custom_gpts: { title: "Custom GPTs Store", icon: "bot", desc: "Membangun asisten AI kustom yang sangat spesifik untuk industri korporat.", steps: ["Setup GPT Builder", "Training data spesifik", "Buka store"], prompts: ["Rancang instruksi sistem untuk GPT yang ahli dalam menangani komplain pelanggan di industri perhotelan."] },
-            automation_platform: { title: "Automation Platform", icon: "network", desc: "Pusat kontrol integrasi berbagai API AI menjadi satu platform terpadu.", steps: ["Dashboard terpadu", "Multi-api handling", "B2B SaaS model"], prompts: ["Jelaskan arsitektur teknis terbaik untuk menghubungkan OpenAI dengan Google Sheets secara real-time."] },
-            ai_branding: { title: "AI Branding House", icon: "fingerprint", desc: "Layanan branding lengkap hulu ke hilir.", steps: ["Logo via Midjourney", "Copy via Claude", "Strategy via GPT"], prompts: ["Buat strategi branding untuk brand fashion lokal yang ingin terlihat futuristik namun tetap ramah lingkungan."] },
-            edge_compute: { title: "Edge Compute Estate", icon: "server", desc: "Investasi aset fisik GPU server.", steps: ["Beli hardware GPU", "Sewa compute power", "Monetisasi mining/rendering"], prompts: ["Analisis ROI untuk GPU RTX 4090 jika digunakan sebagai penyedia server rendering AI saat ini."] }
-        };
+            {
+                phase: "Phase 3: Wealth (1-5 Years)",
+                color: "var(--purple)",
+                projects: [
+                    { id: 'saas', title: "Micro SaaS", icon: "code", desc: "Software solusi spesifik berbasis API AI.", steps: ["Identify API usage", "Build with v0.dev", "Global deployment"] },
+                    { id: 'vc', title: "AI VC", icon: "trending-up", desc: "Investasi pada startup AI tahap awal.", steps: ["Build capital", "Scout early AI startups", "Strategic equity"] },
+                    { id: 'custom_gpts', title: "Custom GPTs Store", icon: "bot", desc: "Ekosistem GPTs spesifik untuk korporat.", steps: ["Prompt engineering", "Knowledge base setup", "Revenue sharing model"] }
+                ]
+            }
+        ];
 
-        const schedule = [
+        const baseSchedule = [
             { day: "Senin", tasks: ["Riset Niche Agency", "Batching Konten Media", "Outreach LinkedIn"] },
             { day: "Selasa", tasks: ["Desain Framer Template", "Riset Aset Marketplace", "Sync Klien Consulting"] },
             { day: "Rabu", tasks: ["Coding Micro SaaS", "Penulisan Newsletter", "Testing Prompt Baru"] },
@@ -539,41 +537,186 @@
             { day: "Minggu", tasks: ["Full Offline / Rest", "Evaluasi Mental", "Clear Mindset"] }
         ];
 
+        // TRACKING SYSTEM (Local Storage)
+        let tracker = JSON.parse(localStorage.getItem('wealth_tracker')) || {
+            projects: {}, // { project_id: { completedSteps: [], customSteps: [] } }
+            planner: {}  // { day: { completedTasks: [], customTasks: [] } }
+        };
+
+        function saveTracker() {
+            localStorage.setItem('wealth_tracker', JSON.stringify(tracker));
+            renderRoadmap();
+            renderSchedule();
+        }
+
+        // NAVIGATION
+        function showPage(pageId) {
+            document.querySelectorAll('main > div').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(`btn-${pageId}`).classList.add('active');
+        }
+
+        // ROADMAP RENDERING
+        function renderRoadmap() {
+            const container = document.getElementById('roadmap-container');
+            container.innerHTML = '';
+
+            roadmapData.forEach(pData => {
+                let phaseHtml = `
+                    <section class="phase-section">
+                        <div class="phase-label"><h2 style="color: ${pData.color}">${pData.phase}</h2></div>
+                        <div class="options-grid">
+                `;
+
+                pData.projects.forEach(p => {
+                    const projectState = tracker.projects[p.id] || { completedSteps: [], customSteps: [] };
+                    const totalSteps = p.steps.length + projectState.customSteps.length;
+                    const completedCount = projectState.completedSteps.length;
+                    const progress = totalSteps > 0 ? (completedCount / totalSteps) * 100 : 0;
+
+                    phaseHtml += `
+                        <div class="card" onclick="openDetails('${p.id}')">
+                            <i data-lucide="${p.icon}" class="card-icon"></i>
+                            <h3>${p.title}</h3>
+                            <p>${p.desc}</p>
+                            <div class="card-progress-container">
+                                <div class="card-progress-bar" style="width: ${progress}%"></div>
+                            </div>
+                            <div class="card-stats">
+                                <span class="stat-badge">${p.tag || (p.priority ? 'PR ' + p.priority : 'SCALE')}</span>
+                                <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: var(--accent)">${Math.round(progress)}% DONE</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                phaseHtml += `</div></section>`;
+                container.innerHTML += phaseHtml;
+            });
+            lucide.createIcons();
+        }
+
+        // MODAL DETAILS & TRACKING
         function openDetails(id) {
-            const data = details[id];
-            if (!data) return;
+            let project;
+            roadmapData.forEach(phase => {
+                const found = phase.projects.find(p => p.id === id);
+                if (found) project = found;
+            });
+
+            if (!project) return;
+
+            const state = tracker.projects[id] || { completedSteps: [], customSteps: [] };
             const overlay = document.getElementById('modal-overlay');
             const content = document.getElementById('modal-content');
 
             content.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 24px;">
-                    <i data-lucide="${data.icon || 'star'}" color="#22C55E"></i>
-                    <h2 style="font-size: 32px;">${data.title}</h2>
+                    <i data-lucide="${project.icon}" color="var(--accent)"></i>
+                    <h2 style="font-size: 32px;">${project.title}</h2>
                 </div>
                 
-                <p style="font-size: 18px; color: #ccc; line-height: 1.8; margin-bottom: 32px;">${data.desc}</p>
-                
-                <div class="detail-block" style="background: rgba(34, 197, 94, 0.05); padding: 24px; border-radius: 16px; border: 1px solid var(--accent-glow);">
-                    <h4 style="color: var(--accent);">🎯 The Sweet Spot (Standout Strategy)</h4>
-                    <p style="color: #FFF; font-size: 16px; line-height: 1.6;">${data.sweetSpot || 'Strategi khusus sedang diformulasikan.'}</p>
-                </div>
+                <p style="font-size: 16px; color: var(--text-dim); margin-bottom: 32px;">${project.desc}</p>
 
                 <div class="detail-block">
-                    <h4>Step-by-Step Execution</h4>
-                    <ul style="list-style: none;">
-                        ${data.steps.map(s => `<li style="margin-bottom: 12px; display: flex; gap: 12px;"><i data-lucide="check" size="16" color="#22C55E"></i> ${s}</li>`).join('')}
+                    <h4>Step-by-Step Tracking</h4>
+                    <ul class="checklist">
+                        ${project.steps.map((s, i) => `
+                            <li class="checklist-item ${state.completedSteps.includes('base_' + i) ? 'completed' : ''}" 
+                                onclick="toggleProjectStep('${id}', 'base_${i}')">
+                                <div class="checkbox"><i data-lucide="check" size="14"></i></div>
+                                <span>${s}</span>
+                            </li>
+                        `).join('')}
+                        ${state.customSteps.map((s, i) => `
+                            <li class="checklist-item ${state.completedSteps.includes('custom_' + i) ? 'completed' : ''}" 
+                                onclick="toggleProjectStep('${id}', 'custom_${i}')">
+                                <div class="checkbox"><i data-lucide="check" size="14"></i></div>
+                                <span>${s}</span>
+                            </li>
+                        `).join('')}
                     </ul>
-                </div>
-                <div class="detail-block">
-                    <h4>Master Prompt</h4>
-                    <div class="prompt-box">
-                        <code id="prompt-code">${data.prompts[0]}</code>
-                        <button class="copy-btn" onclick="copyPrompt()">Copy Prompt</button>
-                    </div>
+                    <input type="text" class="add-task-input" placeholder="+ Add your own requirement/milestone..." 
+                           onkeypress="if(event.key === 'Enter') addCustomStep('${id}', this.value)">
                 </div>
             `;
             overlay.style.display = 'flex';
             lucide.createIcons();
+        }
+
+        function toggleProjectStep(projectId, stepId) {
+            if (!tracker.projects[projectId]) tracker.projects[projectId] = { completedSteps: [], customSteps: [] };
+            const steps = tracker.projects[projectId].completedSteps;
+            const index = steps.indexOf(stepId);
+            if (index > -1) steps.splice(index, 1);
+            else steps.push(stepId);
+            saveTracker();
+            openDetails(projectId);
+        }
+
+        function addCustomStep(projectId, text) {
+            if (!text.trim()) return;
+            if (!tracker.projects[projectId]) tracker.projects[projectId] = { completedSteps: [], customSteps: [] };
+            tracker.projects[projectId].customSteps.push(text);
+            saveTracker();
+            openDetails(projectId);
+        }
+
+        // DAILY PLANNER RENDERING
+        function renderSchedule() {
+            const container = document.getElementById('schedule-container');
+            container.innerHTML = '';
+
+            baseSchedule.forEach(s => {
+                const dayState = tracker.planner[s.day] || { completedTasks: [], customTasks: [] };
+                const totalTasks = s.tasks.length + dayState.customTasks.length;
+                const completed = dayState.completedTasks.length;
+
+                container.innerHTML += `
+                    <div class="day-box">
+                        <div class="day-header">
+                            <span class="day-name">${s.day}</span>
+                            <span class="day-progress">${completed}/${totalTasks} Tasks</span>
+                        </div>
+                        <div class="task-list">
+                            ${s.tasks.map((t, i) => `
+                                <div class="task-row ${dayState.completedTasks.includes('base_' + i) ? 'done' : ''}" 
+                                     onclick="toggleDailyTask('${s.day}', 'base_${i}')">
+                                    <div class="mini-checkbox"></div>
+                                    <span>${t}</span>
+                                </div>
+                            `).join('')}
+                            ${dayState.customTasks.map((t, i) => `
+                                <div class="task-row ${dayState.completedTasks.includes('custom_' + i) ? 'done' : ''}" 
+                                     onclick="toggleDailyTask('${s.day}', 'custom_${i}')">
+                                    <div class="mini-checkbox"></div>
+                                    <span>${t}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <input type="text" class="add-task-input" style="padding: 10px; font-size: 12px;" 
+                               placeholder="+ New Task" onkeypress="if(event.key === 'Enter') addDailyTask('${s.day}', this.value)">
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function toggleDailyTask(day, taskId) {
+            if (!tracker.planner[day]) tracker.planner[day] = { completedTasks: [], customTasks: [] };
+            const tasks = tracker.planner[day].completedTasks;
+            const index = tasks.indexOf(taskId);
+            if (index > -1) tasks.splice(index, 1);
+            else tasks.push(taskId);
+            saveTracker();
+        }
+
+        function addDailyTask(day, text) {
+            if (!text.trim()) return;
+            if (!tracker.planner[day]) tracker.planner[day] = { completedTasks: [], customTasks: [] };
+            tracker.planner[day].customTasks.push(text);
+            saveTracker();
         }
 
         function closeModal(e) {
@@ -582,24 +725,25 @@
             }
         }
 
-        function copyPrompt() {
-            const text = document.getElementById('prompt-code').innerText;
-            navigator.clipboard.writeText(text);
-            alert("Prompt Copied to Clipboard!");
-        }
+        // GLOBAL INIT
+        renderRoadmap();
+        renderSchedule();
 
-        // Init Schedule
-        const schedContainer = document.getElementById('schedule-container');
-        schedule.forEach(s => {
-            schedContainer.innerHTML += `
-                <div class="day-box">
-                    <span class="day-name">${s.day}</span>
-                    ${s.tasks.map(t => `<div class="task-item"><i data-lucide="circle" size="6" style="margin-top: 6px"></i> ${t}</div>`).join('')}
+        // Prompt Hub Content
+        const promptContainer = document.getElementById('global-prompts');
+        const allProjects = roadmapData.flatMap(p => p.projects);
+        allProjects.forEach(p => {
+            // Mock prompts for demo
+            promptContainer.innerHTML += `
+                <div class="card">
+                     <div class="card-stats"><span class="stat-badge">${p.title}</span></div>
+                    <p style="margin-top: 15px; font-family: 'JetBrains Mono'; font-size: 12px; color: #888;">
+                        Generate high-end ${p.title} content with focal point on ${p.tag || 'strategic'} growth...
+                    </p>
+                    <button class="copy-btn" style="position: static; margin-top: 10px; width: 100%;">Copy Baseline Prompt</button>
                 </div>
-            `;
+             `;
         });
-
-        lucide.createIcons();
     </script>
 </body>
 
