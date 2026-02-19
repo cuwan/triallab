@@ -428,6 +428,59 @@
         .done .mini-checkbox {
             background: var(--accent);
         }
+
+        /* Time & Notes Extensions */
+        .task-meta-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            padding: 2px 4px;
+            width: 45px;
+            text-align: center;
+            outline: none;
+        }
+
+        .task-meta-input:focus {
+            border-color: var(--accent);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .day-notes-area {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-dim);
+            font-family: inherit;
+            font-size: 12px;
+            padding: 12px;
+            margin-top: 15px;
+            resize: none;
+            min-height: 60px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .day-notes-area:focus {
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .task-main-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .task-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
     </style>
 </head>
 
@@ -540,7 +593,7 @@
         // TRACKING SYSTEM (Local Storage)
         let tracker = JSON.parse(localStorage.getItem('wealth_tracker')) || {
             projects: {}, // { project_id: { completedSteps: [], customSteps: [] } }
-            planner: {}  // { day: { completedTasks: [], customTasks: [] } }
+            planner: {}  // { day: { completedTasks: [], customTasks: [], taskMeta: {}, dayNotes: '' } }
         };
 
         function saveTracker() {
@@ -620,22 +673,10 @@
                 <p style="font-size: 16px; color: var(--text-dim); margin-bottom: 32px;">${project.desc}</p>
 
                 <div class="detail-block">
-                    <h4>Step-by-Step Tracking</h4>
+                    <h4>Step-by-Step Tracking & Notes</h4>
                     <ul class="checklist">
-                        ${project.steps.map((s, i) => `
-                            <li class="checklist-item ${state.completedSteps.includes('base_' + i) ? 'completed' : ''}" 
-                                onclick="toggleProjectStep('${id}', 'base_${i}')">
-                                <div class="checkbox"><i data-lucide="check" size="14"></i></div>
-                                <span>${s}</span>
-                            </li>
-                        `).join('')}
-                        ${state.customSteps.map((s, i) => `
-                            <li class="checklist-item ${state.completedSteps.includes('custom_' + i) ? 'completed' : ''}" 
-                                onclick="toggleProjectStep('${id}', 'custom_${i}')">
-                                <div class="checkbox"><i data-lucide="check" size="14"></i></div>
-                                <span>${s}</span>
-                            </li>
-                        `).join('')}
+                        ${project.steps.map((s, i) => renderProjectStepRow(id, 'base_' + i, s, state)).join('')}
+                        ${state.customSteps.map((s, i) => renderProjectStepRow(id, 'custom_' + i, s, state)).join('')}
                     </ul>
                     <input type="text" class="add-task-input" placeholder="+ Add your own requirement/milestone..." 
                            onkeypress="if(event.key === 'Enter') addCustomStep('${id}', this.value)">
@@ -643,6 +684,36 @@
             `;
             overlay.style.display = 'flex';
             lucide.createIcons();
+        }
+
+        function renderProjectStepRow(projectId, stepId, text, state) {
+            const isDone = state.completedSteps.includes(stepId);
+            const meta = state.stepMeta ? (state.stepMeta[stepId] || { note: '' }) : { note: '' };
+
+            return `
+                <li class="checklist-item ${isDone ? 'completed' : ''}" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 16px; width: 100%;">
+                        <div class="checkbox" onclick="toggleProjectStep('${projectId}', '${stepId}')">
+                            <i data-lucide="check" size="14"></i>
+                        </div>
+                        <span style="flex: 1;" onclick="toggleProjectStep('${projectId}', '${stepId}')">${text}</span>
+                        <div class="task-actions">
+                             <input type="text" class="task-meta-input" style="width: 120px; font-size: 11px; text-align: left;" 
+                                    placeholder="Add detail/note..." value="${meta.note || ''}"
+                                    onchange="updateStepMeta('${projectId}', '${stepId}', 'note', this.value)">
+                        </div>
+                    </div>
+                </li>
+            `;
+        }
+
+        function updateStepMeta(projectId, stepId, field, value) {
+            if (!tracker.projects[projectId]) tracker.projects[projectId] = { completedSteps: [], customSteps: [], stepMeta: {} };
+            if (!tracker.projects[projectId].stepMeta) tracker.projects[projectId].stepMeta = {};
+            if (!tracker.projects[projectId].stepMeta[stepId]) tracker.projects[projectId].stepMeta[stepId] = {};
+
+            tracker.projects[projectId].stepMeta[stepId][field] = value;
+            saveTracker();
         }
 
         function toggleProjectStep(projectId, stepId) {
@@ -669,7 +740,7 @@
             container.innerHTML = '';
 
             baseSchedule.forEach(s => {
-                const dayState = tracker.planner[s.day] || { completedTasks: [], customTasks: [] };
+                const dayState = tracker.planner[s.day] || { completedTasks: [], customTasks: [], taskMeta: {}, dayNotes: '' };
                 const totalTasks = s.tasks.length + dayState.customTasks.length;
                 const completed = dayState.completedTasks.length;
 
@@ -680,27 +751,52 @@
                             <span class="day-progress">${completed}/${totalTasks} Tasks</span>
                         </div>
                         <div class="task-list">
-                            ${s.tasks.map((t, i) => `
-                                <div class="task-row ${dayState.completedTasks.includes('base_' + i) ? 'done' : ''}" 
-                                     onclick="toggleDailyTask('${s.day}', 'base_${i}')">
-                                    <div class="mini-checkbox"></div>
-                                    <span>${t}</span>
-                                </div>
-                            `).join('')}
-                            ${dayState.customTasks.map((t, i) => `
-                                <div class="task-row ${dayState.completedTasks.includes('custom_' + i) ? 'done' : ''}" 
-                                     onclick="toggleDailyTask('${s.day}', 'custom_${i}')">
-                                    <div class="mini-checkbox"></div>
-                                    <span>${t}</span>
-                                </div>
-                            `).join('')}
+                            ${s.tasks.map((t, i) => renderTaskRow(s.day, 'base_' + i, t, dayState)).join('')}
+                            ${dayState.customTasks.map((t, i) => renderTaskRow(s.day, 'custom_' + i, t, dayState)).join('')}
                         </div>
                         <input type="text" class="add-task-input" style="padding: 10px; font-size: 12px;" 
                                placeholder="+ New Task" onkeypress="if(event.key === 'Enter') addDailyTask('${s.day}', this.value)">
+                        
+                        <textarea class="day-notes-area" placeholder="Keterangan hari ini / Focus of the day..." 
+                                  onchange="saveDayNotes('${s.day}', this.value)">${dayState.dayNotes || ''}</textarea>
                     </div>
                 `;
             });
             lucide.createIcons();
+        }
+
+        function renderTaskRow(day, taskId, taskText, dayState) {
+            const isDone = dayState.completedTasks.includes(taskId);
+            const meta = dayState.taskMeta ? (dayState.taskMeta[taskId] || { time: '' }) : { time: '' };
+
+            return `
+                <div class="task-row ${isDone ? 'done' : ''}">
+                    <div class="task-main-content" onclick="toggleDailyTask('${day}', '${taskId}')">
+                        <div class="mini-checkbox"></div>
+                        <span>${taskText}</span>
+                    </div>
+                    <div class="task-actions">
+                        <input type="text" class="task-meta-input" placeholder="Time" value="${meta.time || ''}" 
+                               onclick="event.stopPropagation()" 
+                               onchange="updateTaskMeta('${day}', '${taskId}', 'time', this.value)">
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateTaskMeta(day, taskId, field, value) {
+            if (!tracker.planner[day]) tracker.planner[day] = { completedTasks: [], customTasks: [], taskMeta: {}, dayNotes: '' };
+            if (!tracker.planner[day].taskMeta) tracker.planner[day].taskMeta = {};
+            if (!tracker.planner[day].taskMeta[taskId]) tracker.planner[day].taskMeta[taskId] = {};
+
+            tracker.planner[day].taskMeta[taskId][field] = value;
+            saveTracker();
+        }
+
+        function saveDayNotes(day, text) {
+            if (!tracker.planner[day]) tracker.planner[day] = { completedTasks: [], customTasks: [], taskMeta: {}, dayNotes: '' };
+            tracker.planner[day].dayNotes = text;
+            saveTracker();
         }
 
         function toggleDailyTask(day, taskId) {
