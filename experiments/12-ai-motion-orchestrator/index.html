@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Independent Day | True SVG Handwriting</title>
+    <title>SVG Motion Engine 4K</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;800&family=JetBrains+Mono:wght@400&display=swap"
         rel="stylesheet">
@@ -13,7 +13,9 @@
         :root {
             --bg: #050505;
             --gold: #D4AF37;
+            --gold-light: #FBF5B7;
             --border: rgba(255, 255, 255, 0.1);
+            --panel-bg: #111111;
         }
 
         body {
@@ -26,28 +28,100 @@
             overflow: hidden;
         }
 
-        /* Controls */
+        /* Editor Panel */
         aside {
-            width: 300px;
+            width: 320px;
             border-right: 1px solid var(--border);
             padding: 24px;
-            background: #000;
+            background: var(--panel-bg);
             z-index: 10;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            overflow-y: auto;
         }
 
-        .export-specs {
-            background: rgba(255, 215, 0, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 11px;
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-group label {
+            font-size: 12px;
             color: #AAA;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
         }
 
-        .export-specs strong {
+        .control-group input[type="text"],
+        .control-group textarea {
+            background: #000;
+            border: 1px solid var(--border);
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        .control-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--gold);
+        }
+
+        .btn-action {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .align-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        .align-btn {
+            flex: 1;
+            padding: 8px;
+            background: #000;
+            border: 1px solid var(--border);
+            color: #888;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .align-btn.active {
+            border-color: var(--gold);
             color: var(--gold);
         }
 
@@ -61,40 +135,48 @@
             position: relative;
         }
 
-        #capture-area {
+        /* Resolution Frame for 4K */
+        #render-frame {
             position: relative;
-            width: 100%;
-            height: 100%;
+            background: transparent;
+            width: 1920px;
+            /* Scale down preview dari 3840 untuk display */
+            height: 1080px;
+            transform: scale(0.5);
+            /* Preview scale */
+            transform-origin: center center;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: transparent;
+            /* Untuk render transparan */
+            border: 1px dashed rgba(255, 255, 255, 0.2);
         }
 
         svg {
             width: 100%;
             height: 100%;
-            max-width: 1200px;
+            overflow: visible;
         }
 
         .draw-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 120px;
             fill: transparent;
             stroke: url(#goldGradient);
             stroke-width: 2px;
-            stroke-dasharray: 800;
-            stroke-dashoffset: 800;
+            /* Per parameter akan diupdate via JS */
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
             opacity: 0;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
         }
 
         .draw-text.animate-stroke {
             opacity: 1;
-            animation: drawLine 2.5s ease-in-out forwards, fillGold 1s ease-in-out 2.5s forwards;
+            animation: drawLine 1s ease-in-out forwards, fillGold 0.8s ease-in-out 1s forwards;
         }
 
         @keyframes drawLine {
             0% {
-                stroke-dashoffset: 800;
+                stroke-dashoffset: 1000;
             }
 
             100% {
@@ -105,14 +187,13 @@
         @keyframes fillGold {
             0% {
                 fill: transparent;
-                filter: drop-shadow(0 0 0px transparent);
                 stroke-width: 2px;
             }
 
             100% {
                 fill: url(#goldGradient);
-                filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
                 stroke-width: 0px;
+                filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
             }
         }
 
@@ -124,7 +205,7 @@
             pointer-events: none;
             z-index: 5;
             opacity: 0;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
         }
 
         @keyframes splatter {
@@ -139,110 +220,292 @@
             }
         }
 
-        .log-box {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
+        #render-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: #555;
+        }
+
+        .progress-bar-container {
+            width: 400px;
+            height: 10px;
+            background: #222;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--gold);
+            transition: 0.2s;
         }
     </style>
 </head>
 
 <body>
+    <!-- EDITOR PANEL -->
     <aside>
         <div style="font-weight: 800; color: var(--gold); display: flex; align-items: center; gap: 8px;">
-            <i data-lucide="pen-tool"></i> TRUE SVG MOTION
+            <i data-lucide="sliders"></i> SVG ENGINE CONTROLS
         </div>
 
-        <div class="export-specs">
-            <strong>Target Export Specs:</strong><br>
-            • Resolution: 4K (3840x2160)<br>
-            • Frame Rate: 30 FPS<br>
-            • Duration: 10 Seconds<br>
-            • Target Size: ~30MB<br>
-            • Quality: High Fidelity (CRF 18)
+        <div class="control-group">
+            <label>Text Content</label>
+            <textarea id="val-text" oninput="updatePreview()">Happy
+Independent
+Day</textarea>
         </div>
 
-        <button onclick="startAnimation()"
-            style="background: var(--gold); color: #000; border: none; padding: 12px; border-radius: 8px; font-weight: 800; cursor: pointer;">
-            REPLAY ANIMATION
-        </button>
+        <div class="control-group">
+            <label>Alignment</label>
+            <div class="align-group">
+                <button class="align-btn" onclick="setAlign('start')"><i data-lucide="align-left"></i></button>
+                <button class="align-btn active" onclick="setAlign('middle')"><i
+                        data-lucide="align-center"></i></button>
+                <button class="align-btn" onclick="setAlign('end')"><i data-lucide="align-right"></i></button>
+            </div>
+            <input type="hidden" id="val-align" value="middle">
+        </div>
+
+        <div class="control-group">
+            <label>Font Size <span><span id="label-size">240</span>px</span></label>
+            <input type="range" id="val-size" min="50" max="600" value="240" oninput="updatePreview('size')">
+        </div>
+
+        <div class="control-group">
+            <label>Kerning (Spacing) <span><span id="label-spacing">0</span>px</span></label>
+            <input type="range" id="val-spacing" min="-20" max="100" value="0" oninput="updatePreview('spacing')">
+        </div>
+
+        <div class="control-group">
+            <label>Line Height <span><span id="label-lineheight">300</span>px</span></label>
+            <input type="range" id="val-lineheight" min="100" max="800" value="300"
+                oninput="updatePreview('lineheight')">
+        </div>
+
+        <div class="control-group">
+            <label>Animation Speed <span><span id="label-speed">150</span>ms / char</span></label>
+            <input type="range" id="val-speed" min="20" max="500" value="150" oninput="updatePreview('speed')">
+        </div>
+
+        <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn-action btn-outline" onclick="startAnimation()">
+                <i data-lucide="play-circle"></i> PREVIEW ANIMATION
+            </button>
+            <button class="btn-action" onclick="simulateRender()">
+                <i data-lucide="download"></i> RENDER 4K SEQUENCE
+            </button>
+        </div>
     </aside>
 
-    <main id="capture-area">
-        <svg viewBox="0 0 1200 800" id="text-svg">
-            <defs>
-                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#BF953F" />
-                    <stop offset="25%" stop-color="#FCF6BA" />
-                    <stop offset="50%" stop-color="#B38728" />
-                    <stop offset="75%" stop-color="#FBF5B7" />
-                    <stop offset="100%" stop-color="#AA771C" />
-                </linearGradient>
-            </defs>
-            <text x="50%" y="250" text-anchor="middle" class="draw-text" id="line1" data-delay="0">Happy</text>
-            <text x="50%" y="450" text-anchor="middle" class="draw-text" id="line2" data-delay="2500">Independent</text>
-            <text x="50%" y="650" text-anchor="middle" class="draw-text" id="line3" data-delay="5000">Day</text>
-        </svg>
-
-        <div class="log-box">AI EXECUTION: TRUE_SVG_STROKE_ANIMATION</div>
+    <!-- PREVIEW AREA -->
+    <main>
+        <div id="render-frame">
+            <svg viewBox="0 0 1920 1080" id="text-svg">
+                <defs>
+                    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#BF953F" />
+                        <stop offset="25%" stop-color="#FCF6BA" />
+                        <stop offset="50%" stop-color="#B38728" />
+                        <stop offset="75%" stop-color="#FBF5B7" />
+                        <stop offset="100%" stop-color="#AA771C" />
+                    </linearGradient>
+                </defs>
+                <g id="svg-content-group">
+                    <!-- Text path elements will be injected here per letter -->
+                </g>
+            </svg>
+        </div>
     </main>
+
+    <!-- RENDER OVERLAY -->
+    <div id="render-overlay">
+        <i data-lucide="cpu" color="#D4AF37" size="48" class="animate-pulse"></i>
+        <h2 style="color: white; margin-top: 20px;">Rendering 4K PNG Sequence (Alpha)</h2>
+        <p style="color: #888;">Extracting SVG vector paths to raster frames (30fps)...</p>
+        <div class="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+    </div>
 
     <script>
         lucide.createIcons();
 
+        // UI Control Updates
+        function setAlign(align) {
+            document.querySelectorAll('.align-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById('val-align').value = align;
+            updatePreview();
+        }
+
         function createSplatter(x, y) {
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 8; i++) {
                 const splat = document.createElement('div');
                 splat.className = 'ink-splat';
-                const size = Math.random() * 6 + 2;
+
+                // Scale splat size relatively to the frame scale
+                const size = Math.random() * 10 + 4;
                 splat.style.width = size + 'px';
                 splat.style.height = size + 'px';
+
                 splat.style.left = x + 'px';
                 splat.style.top = y + 'px';
 
-                // Random trajectory for the splatter
-                const tx = (Math.random() - 0.5) * 100 + 'px';
-                const ty = (Math.random() - 0.5) * 100 + 'px';
+                const tx = (Math.random() - 0.5) * 150 + 'px';
+                const ty = (Math.random() - 0.5) * 150 + 'px';
                 splat.style.setProperty('--tx', tx);
                 splat.style.setProperty('--ty', ty);
 
                 splat.style.animation = `splatter ${0.4 + Math.random() * 0.4}s cubic-bezier(0.1, 0.8, 0.3, 1) forwards`;
-                document.getElementById('capture-area').appendChild(splat);
+                document.getElementById('render-frame').appendChild(splat);
                 setTimeout(() => splat.remove(), 1000);
             }
         }
 
-        function startAnimation() {
-            const lines = document.querySelectorAll('.draw-text');
+        // Core Engine: Convert Text to Per-Letter SVG Nodes
+        function updateSVGNodes() {
+            const rawText = document.getElementById('val-text').value;
+            const container = document.getElementById('svg-content-group');
+            container.innerHTML = ''; // Clear
 
-            // Reset
-            lines.forEach(line => {
-                line.classList.remove('animate-stroke');
-                void line.offsetWidth; // trigger reflow
+            const lines = rawText.split('\n');
+            const align = document.getElementById('val-align').value;
+            const fontSize = document.getElementById('val-size').value;
+            const spacing = document.getElementById('val-spacing').value;
+            const lineHeight = document.getElementById('val-lineheight').value;
+
+            // X position logic based on alignment
+            let anchorX = '50%';
+            if (align === 'start') anchorX = '10%';
+            if (align === 'end') anchorX = '90%';
+
+            // Y Starting Point (Centered vertically)
+            let startY = 540 - ((lines.length - 1) * lineHeight) / 2;
+
+            let globalCharIndex = 0; // for continuous delay sequence
+
+            lines.forEach((lineText, lineIdx) => {
+                const yPos = startY + (lineIdx * lineHeight);
+
+                // SVG <text> tag as a wrapper for <tspan> so kerning text can flow horizontally properly
+                // Since SVG kerning on separate text tags requires calculating actual bbox widths which is hard
+                // We use dx attribute on tspans!
+
+                const textWrapper = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                textWrapper.setAttribute('x', anchorX);
+                textWrapper.setAttribute('y', yPos);
+                textWrapper.setAttribute('text-anchor', align);
+                textWrapper.style.fontSize = fontSize + 'px';
+                textWrapper.style.letterSpacing = spacing + 'px';
+
+                [...lineText].forEach((char, charIdx) => {
+                    const tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+                    tspan.textContent = char;
+                    tspan.setAttribute('class', 'draw-text');
+                    tspan.setAttribute('data-index', globalCharIndex);
+
+                    // Maintain space parsing
+                    if (char === ' ') {
+                        tspan.setAttribute('xml:space', 'preserve');
+                    }
+
+                    textWrapper.appendChild(tspan);
+                    globalCharIndex++;
+                });
+
+                container.appendChild(textWrapper);
+            });
+        }
+
+        function updatePreview(triggerId) {
+            // Update labels
+            if (triggerId) {
+                const val = document.getElementById(`val-${triggerId}`).value;
+                document.getElementById(`label-${triggerId}`).innerText = val;
+            }
+            // Rebuild
+            updateSVGNodes();
+        }
+
+        // Animation Execution
+        function startAnimation() {
+            // Clear old splatters just in case
+            document.querySelectorAll('.ink-splat').forEach(el => el.remove());
+
+            const chars = document.querySelectorAll('.draw-text');
+            const speedMs = parseInt(document.getElementById('val-speed').value);
+
+            // Reset state
+            chars.forEach(char => {
+                char.classList.remove('animate-stroke');
+                void char.offsetWidth; // Force Reflow
             });
 
-            lines.forEach((line, index) => {
-                const delay = parseInt(line.getAttribute('data-delay'));
+            // Calculate timing for each character
+            chars.forEach((char) => {
+                const index = parseInt(char.getAttribute('data-index'));
+                const delay = index * speedMs; // Delay per letter
+
+                // Skip animation logic for blank spaces
+                if (char.textContent === ' ') return;
 
                 setTimeout(() => {
-                    line.classList.add('animate-stroke');
+                    char.classList.add('animate-stroke');
 
-                    // Create ink splatters when the fill color kicks in
+                    // Trigger ink splatter exactly when the "Fill Gold" animation ends
+                    // Stroke takes 1s, Fill takes 0.8s starting at 1.0s. Total = 1.8s
                     setTimeout(() => {
-                        const rect = line.getBoundingClientRect();
-                        // Splatter randomly across the word's bounding box to simulate completing strokes
-                        createSplatter(rect.right - 50, rect.bottom - 20);
-                        createSplatter(rect.left + rect.width / 2, rect.top + rect.height / 2);
-                    }, 2500); // 2.5s is when the drawLine animation ends and fillGold starts
+                        const bbox = char.getBoundingClientRect(); // Get pixel position of character
+                        const frameRect = document.getElementById('render-frame').getBoundingClientRect();
+
+                        // Convert browser absolute coords to relative coords inside the scaled render-frame
+                        // Important for correct splatter positioning
+                        const relativeX = (bbox.right - frameRect.left) * 2; // multiply by 2 because frame is scale(0.5)
+                        const relativeY = (bbox.top + bbox.height / 2 - frameRect.top) * 2;
+
+                        // Fire splatter at the tail end of the letter
+                        createSplatter(relativeX - (Math.random() * 20), relativeY);
+                    }, 1500); // 1.5s after letter starts drawing
 
                 }, delay);
             });
         }
 
-        // Auto start
+        // Export Simulation
+        function simulateRender() {
+            const overlay = document.getElementById('render-overlay');
+            const bar = document.getElementById('progress-bar');
+            overlay.style.display = 'flex';
+            bar.style.width = '0%';
+
+            startAnimation(); // Start the drawing process
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                bar.style.width = progress + '%';
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        alert('Render Selesai!\n\n(Simulasi) File "sequence_4K_30fps.zip" telah siap. Di dalam pipeline asli, web akan mengekstrak frame per milidetik menggunakan Canvas to Blob lalu melemparnya ke FFmpeg.wasm atau trigger API Backend.');
+                    }, 500);
+                }
+            }, 100); // Simulate 10s render process
+        }
+
+        // Init Layout
+        updatePreview();
         setTimeout(startAnimation, 500);
     </script>
 </body>
