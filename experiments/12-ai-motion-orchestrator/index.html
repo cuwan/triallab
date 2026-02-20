@@ -323,178 +323,171 @@
 
         <!-- TABS NAV -->
         <div class="tabs-nav"
-            style="display: flex; gap: 5px; background: #000; padding: 5px; border-radius: 8px; border: 1px solid var(--border);">
+            style="display: flex; gap: 5px; background: #000; padding: 5px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px;">
             <button class="tab-btn active" onclick="switchTab('studio')"
-                style="flex:1; padding: 8px; background: transparent; border: none; color: #888; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; transition: 0.2s;">STUDIO</button>
+                style="flex:1; padding: 10px; background: transparent; border: none; color: #888; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 800; letter-spacing: 1px; transition: 0.2s;">STUDIO</button>
             <button class="tab-btn" onclick="switchTab('gemini')"
-                style="flex:1; padding: 8px; background: transparent; border: none; color: #888; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; transition: 0.2s;">GEMINI
-                3.1</button>
+                style="flex:1; padding: 10px; background: transparent; border: none; color: #888; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 800; letter-spacing: 1px; transition: 0.2s;">GEMINI
+                HUB</button>
         </div>
 
         <!-- TAB: STUDIO -->
-        <div id="tab-studio" class="tab-content"
-            style="display: flex; flex-direction: column; gap: 20px; flex: 1; overflow-y: auto;">
+        <div id="tab-studio" class="tab-content" style="display: flex; flex-direction: column; gap: 18px; flex: 1;">
             <div class="control-group">
                 <label>Text Content</label>
                 <textarea id="val-text" oninput="updatePreview()">Happy
 Independent
 Day</textarea>
-                <button class="align-btn active" onclick="setAlign('middle')"><i
-                        data-lucide="align-center"></i></button>
-                <button class="align-btn" onclick="setAlign('end')"><i data-lucide="align-right"></i></button>
             </div>
-            <input type="hidden" id="val-align" value="middle">
-        </div>
 
-        <div class="control-group">
-            <label>Font Size <span><span id="label-size">240</span>px</span></label>
-            <input type="range" id="val-size" min="50" max="600" value="240" oninput="updatePreview('size')">
-        </div>
+            <div class="control-group">
+                <label>Alignment</label>
+                <div class="align-group">
+                    <button class="align-btn" onclick="setAlign('start')"><i data-lucide="align-left"></i></button>
+                    <button class="align-btn active" onclick="setAlign('middle')"><i
+                            data-lucide="align-center"></i></button>
+                    <button class="align-btn" onclick="setAlign('end')"><i data-lucide="align-right"></i></button>
+                </div>
+                <input type="hidden" id="val-align" value="middle">
+            </div>
 
-        <div class="control-group">
-            <label>Kerning (Spacing) <span><span id="label-spacing">0</span>px</span></label>
-            <input type="range" id="val-spacing" min="-20" max="100" value="0" oninput="updatePreview('spacing')">
-        </div>
+            <div class="control-group">
+                <label>Font Size <span><span id="label-size">240</span>px</span></label>
+                <input type="range" id="val-size" min="50" max="600" value="240" oninput="updatePreview('size')">
+            </div>
 
-        <div class="control-group">
-            <label>Line Height <span><span id="label-lineheight">300</span>px</span></label>
-            <input type="range" id="val-lineheight" min="100" max="800" value="300"
-                oninput="updatePreview('lineheight')">
-        </div>
+            <div class="control-group">
+                <label>Kerning (Spacing) <span><span id="label-spacing">0</span>px</span></label>
+                <input type="range" id="val-spacing" min="-20" max="100" value="0" oninput="updatePreview('spacing')">
+            </div>
 
-        <div class="control-group">
-            <label>Outer Glow <span><span id="label-og-size">15</span>px | <span
-                        id="label-og-opacity">0.6</span></span></label>
-            <div style="display:flex; gap:10px;">
-                <input type="range" id="val-og-size" min="0" max="50" value="15" oninput="updateGlow()">
-                <input type="range" id="val-og-opacity" min="0" max="1" step="0.1" value="0.6" oninput="updateGlow()"
-                    style="width: 50%;">
+            <div class="control-group">
+                <label>Line Height <span><span id="label-lineheight">300</span>px</span></label>
+                <input type="range" id="val-lineheight" min="100" max="800" value="300"
+                    oninput="updatePreview('lineheight')">
+            </div>
+
+            <div class="control-group">
+                <label>Outer Glow <span><span id="label-og-size">15</span>px | <span
+                            id="label-og-opacity">0.6</span></span></label>
+                <div style="display:flex; gap:10px;">
+                    <input type="range" id="val-og-size" min="0" max="50" value="15" oninput="updateGlow()">
+                    <input type="range" id="val-og-opacity" min="0" max="1" step="0.1" value="0.6"
+                        oninput="updateGlow()" style="width: 50%;">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Inner Glow <span><span id="label-ig-size">3</span>px | <span
+                            id="label-ig-opacity">0.5</span></span></label>
+                <div style="display:flex; gap:10px;">
+                    <input type="range" id="val-ig-size" min="0" max="15" value="3" oninput="updateGlow()">
+                    <input type="range" id="val-ig-opacity" min="0" max="1" step="0.1" value="0.5"
+                        oninput="updateGlow()" style="width: 50%;">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Animation Speed <span><span id="label-speed">150</span>ms</span></label>
+                <input type="range" id="val-speed" min="50" max="500" value="150"
+                    oninput="document.getElementById('label-speed').innerText = this.value">
+            </div>
+
+            <div
+                style="margin-top: auto; display: flex; flex-direction: column; gap: 10px; padding-top: 20px; border-top: 1px solid var(--border);">
+                <button class="btn-action btn-outline" onclick="startAnimation()">
+                    <i data-lucide="play-circle"></i> PREVIEW
+                </button>
+                <button class="btn-action" onclick="simulateRender()">
+                    <i data-lucide="download"></i> 4K RENDER
+                </button>
             </div>
         </div>
 
-        <div class="control-group">
-            <label>Inner Glow <span><span id="label-ig-size">3</span>px | <span
-                        id="label-ig-opacity">0.5</span></span></label>
-            <div style="display:flex; gap:10px;">
-                <input type="range" id="val-ig-size" min="0" max="15" value="3" oninput="updateGlow()">
-                <input type="range" id="val-ig-opacity" min="0" max="1" step="0.1" value="0.5" oninput="updateGlow()"
-                    style="width: 50%;">
-            </div>
-        </div>
-
-        <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px;">
-            <button class="btn-action btn-outline" onclick="startAnimation()">
-                <i data-lucide="play-circle"></i> PREVIEW ANIMATION
-            </button>
-            <button class="btn-action" onclick="simulateRender()">
-                <i data-lucide="download"></i> RENDER 4K SEQUENCE
-            </button>
-        </div>
-        </div> <!-- End of TAB STUDIO -->
-
-        <!-- TAB: GEMINI CAPABILITIES -->
+        <!-- TAB: GEMINI HUB -->
         <div id="tab-gemini" class="tab-content"
-            style="display: none; flex-direction: column; gap: 15px; flex: 1; overflow-y: auto;">
+            style="display: none; flex-direction: column; gap: 20px; flex: 1; padding: 10px 5px;">
 
             <div
-                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                style="text-align: center; padding: 0 0 25px 0; border-bottom: 1px solid var(--border); margin-bottom: 5px;">
+                <h2 style="margin: 0; font-size: 20px; color: #FFF; letter-spacing: 3px; font-weight: 800;">GEMINI 3.1
+                </h2>
+                <div
+                    style="font-size: 11px; color: var(--gold); font-weight: 800; margin-top: 8px; letter-spacing: 1px;">
+                    INTELLIGENT AGENT HUB</div>
+            </div>
+
+            <div
+                style="background: rgba(168, 85, 247, 0.08); padding: 18px; border-radius: 16px; border: 1px solid rgba(168, 85, 247, 0.2); transition: 0.3s;">
                 <h3
-                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
-                    <i data-lucide="bot" style="color: #A855F7;"></i> Deep Research Loop
+                    style="margin: 0 0 12px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="bot" style="color: #A855F7;" size="18"></i> Deep Research Loop
                 </h3>
-                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
-                    Gemini 3.1 membaca struktur codebase yang kompleks. Bisa mencari pola bug di project besar (seperti
-                    menyusuri 10 folder sekaligus) untuk refactoring otomatis.
+                <p style="font-size: 12px; color: #CCC; line-height: 1.6; margin: 0;">
+                    Membaca struktur codebase kompleks. Mencari pola bug di project besar (multi-folder) untuk
+                    refactoring otomatis secara cerdas.
                 </p>
                 <div
-                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #A855F7;">
-                    <strong>Contoh:</strong> "Analisa file JS di folder src, ubah semua fetch() jadi axios()"
+                    style="margin-top: 12px; font-size: 11px; color: #EEE; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; border-left: 3px solid #A855F7;">
+                    <strong>Prompt:</strong> "Analisa performa semua file .svg di folder assets."
                 </div>
             </div>
 
             <div
-                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                style="background: rgba(34, 197, 94, 0.08); padding: 18px; border-radius: 16px; border: 1px solid rgba(34, 197, 94, 0.2);">
                 <h3
-                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
-                    <i data-lucide="terminal-square" style="color: #22C55E;"></i> Agentic Terminal Control
+                    style="margin: 0 0 12px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="eye" style="color: #38BDF8;" size="18"></i> Multimodal Vision
                 </h3>
-                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
-                    Kemampuan mengeksekusi bash script. Gemini bisa menginstal dependency (npm install), fix error
-                    console, bahkan melakukan deploy ke server secara autonomus.
+                <p style="font-size: 12px; color: #CCC; line-height: 1.6; margin: 0;">
+                    **Bisa!** Saya dapat menganalisa file visual seperti **GIF**, Video, dan Gambar. Kirimkan saja
+                    file GIF-nya, saya bisa membedah gerakan frame-by-frame, deteksi objek, atau mengekstrak style
+                    desainnya.
                 </p>
                 <div
-                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #22C55E;">
-                    <strong>Contoh:</strong> "Bikin repo GitHub, push project ini, & setup Pages!"
+                    style="margin-top: 12px; font-size: 11px; color: #EEE; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; border-left: 3px solid #38BDF8;">
+                    <strong>Prompt:</strong> "Lihat GIF ini, jelaskan transisinya dan kasih saran perbaikan."
                 </div>
             </div>
 
             <div
-                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                style="background: rgba(212, 175, 55, 0.08); padding: 18px; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.2);">
                 <h3
-                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
-                    <i data-lucide="pen-tool" style="color: var(--gold);"></i> Vector Math & SVG Matrix
+                    style="margin: 0 0 12px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="pen-tool" style="color: var(--gold);" size="18"></i> Vector & SVG Math
                 </h3>
-                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
-                    Gemini dapat menghitung koordinat Bounding-Box SVG, Matrix rotasi, dan SVG Filters setara After
-                    Effects untuk membuat engine SVG generator otomatis (seperti yg kamu lihat di tab Studio!).
+                <p style="font-size: 12px; color: #CCC; line-height: 1.6; margin: 0;">
+                    Kalkulasi Bounding-Box SVG secara presisi untuk manipulasi path dan koordinat secara live dalam
+                    hitungan milidetik.
                 </p>
-                <div
-                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid var(--gold);">
-                    <strong>Contoh:</strong> "Buatkan script JS untuk ubah SVG ini beranimasi stroke by stroke."
-                </div>
             </div>
 
             <div
-                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                style="background: rgba(245, 158, 11, 0.08); padding: 18px; border-radius: 16px; border: 1px solid rgba(245, 158, 11, 0.2);">
                 <h3
-                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
-                    <i data-lucide="image" style="color: #3B82F6;"></i> Visual Tool & Generasi
+                    style="margin: 0 0 12px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="terminal-square" style="color: #F59E0B;" size="18"></i> Agentic Control
                 </h3>
-                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
-                    Berbekal default_api_generate_image, Agent dapat merancang interface UX, mockup dashboard, atau
-                    asset visual 2D di tengah proses coding.
+                <p style="font-size: 12px; color: #CCC; line-height: 1.6; margin: 0;">
+                    Eksekusi Terminal (Bash/Powershell), install dependency, fix console errors, hingga deployment
+                    autonomus.
                 </p>
-                <div
-                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #3B82F6;">
-                    <strong>Contoh:</strong> "Generate mockup dashboard financial warna dark-purple."
-                </div>
             </div>
 
             <div
-                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                style="background: rgba(239, 68, 68, 0.08); padding: 18px; border-radius: 16px; border: 1px solid rgba(239, 68, 68, 0.2);">
                 <h3
-                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
-                    <i data-lucide="network" style="color: #F59E0B;"></i> API Orchestration
+                    style="margin: 0 0 12px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="shield-alert" style="color: #EF4444;" size="18"></i> Self-Healing
                 </h3>
-                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
-                    Memahami kompleksitas REST, GraphQL, dan gRPC. Dapat menulis proxy backend (edge functions),
-                    menyusun integrasi database, & manage OAuth flow.
+                <p style="font-size: 12px; color: #CCC; line-height: 1.6; margin: 0;">
+                    Eksplorasi log error secara mandiri, mencari root cause, dan melakukan patch coding tanpa bantuan
+                    user.
                 </p>
-                <div
-                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #F59E0B;">
-                    <strong>Contoh:</strong> "Bikin endpoint API untuk narik data user dari Supabase table 'xyz'."
-                </div>
             </div>
 
-            <div
-                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
-                <h3
-                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
-                    <i data-lucide="shield-alert" style="color: #EF4444;"></i> Self-Healing Code
-                </h3>
-                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
-                    Ketika script error di terminal atau browser, Gemini 3.1 Pro mampu membaca error log tersebut,
-                    mencari penyebab aslinya, dan menulis patch / kode perbaikan *(seperti yang tadi dilakukan pada
-                    error GitHub Pages 404)*.
-                </p>
-                <div
-                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #EF4444;">
-                    <strong>Contoh:</strong> "Tadi npm run build failed, ini lognya. Tolong fix package.json-nya."
-                </div>
-            </div>
-
-        </div> <!-- End of TAB GEMINI -->
-
+            <div style="height: 60px;"></div>
+        </div>
     </aside>
 
     <!-- PREVIEW AREA -->
@@ -560,10 +553,11 @@ Day</textarea>
         lucide.createIcons();
 
         // Tabs Logic
-        function switchTab(tabId) {
+        function switchTab(tabId, el) {
             // Update buttons
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            if (el) el.classList.add('active');
+            else if (event) event.currentTarget.classList.add('active');
 
             // Switch content
             document.getElementById('tab-studio').style.display = 'none';
