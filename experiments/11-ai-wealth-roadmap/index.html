@@ -482,6 +482,33 @@
             gap: 8px;
         }
 
+        /* Monthly Info Boxes */
+        .info-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-box.target strong {
+            color: var(--accent);
+        }
+
+        .info-box.reminder strong {
+            color: var(--gold);
+        }
+
         /* Analytics Dashboard */
         .analytics-row {
             display: grid;
@@ -582,8 +609,10 @@
             <nav>
                 <button onclick="showPage('roadmap')" class="nav-link active" id="btn-roadmap"><i data-lucide="map"></i>
                     Roadmap</button>
+                <button onclick="showPage('monthly')" class="nav-link" id="btn-monthly"><i data-lucide="target"></i>
+                    Monthly Target</button>
                 <button onclick="showPage('schedule')" class="nav-link" id="btn-schedule"><i data-lucide="calendar"></i>
-                    Daily Planner</button>
+                    Weekly Planner</button>
                 <button onclick="showPage('prompts')" class="nav-link" id="btn-prompts"><i data-lucide="terminal"></i>
                     Prompts Hub</button>
             </nav>
@@ -607,12 +636,27 @@
                 </div>
             </div>
 
+            <!-- MONTHLY PAGE -->
+            <div id="page-monthly" class="hidden">
+                <div class="section-header">
+                    <div>
+                        <h1>Monthly Alignment</h1>
+                        <p style="color: var(--text-dim);">Pisahkan target per sumber income agar roadmap tetap
+                            terkontrol jelas.</p>
+                    </div>
+                </div>
+                <div class="options-grid" id="monthly-container">
+                    <!-- JS Injected -->
+                </div>
+            </div>
+
             <!-- SCHEDULE PAGE -->
             <div id="page-schedule" class="hidden">
                 <div class="section-header">
                     <div>
-                        <h1>Daily Multiplier Planner</h1>
-                        <p style="color: var(--text-dim);">Track ritual harian Anda untuk mencapai target $10K.</p>
+                        <h1>Weekly Execution Planner</h1>
+                        <p style="color: var(--text-dim);">Eksekusi ritme mingguan. Implementasikan target Monthly ke
+                            aktivitas harian ini.</p>
                     </div>
                 </div>
 
@@ -696,15 +740,52 @@
             { day: "Minggu", tasks: ["Full Offline / Rest", "Evaluasi Mental", "Clear Mindset"] }
         ];
 
+        const monthlyData = [
+            {
+                id: "monthly_assets",
+                category: "Digital Assets (Passive Income)",
+                projects: ["Video Motion Graphics", "Mockup Mastery", "Framer Template Store"],
+                controllable_output: "Publish 20 Motion Graphics, 10 High-Res Mockups, and 2 Premium Framer Templates.",
+                expected_result: "Consistent royalty payouts ($500-$2000/mo) from microstock and template marketplaces. Compounding value.",
+                color: "var(--accent)"
+            },
+            {
+                id: "monthly_agency",
+                category: "Client Services (Active High-Ticket)",
+                projects: ["AI-Framer Agency"],
+                controllable_output: "Send 50 direct personalized outreach emails/DMs. Create 2 new Case Studies.",
+                expected_result: "Acquire 1-2 new clients ($3k - $5k per project). Direct cashflow injection.",
+                color: "var(--purple)"
+            },
+            {
+                id: "monthly_media",
+                category: "Media Empire & SEO (Audience Building)",
+                projects: ["Media Empire (Shorts)", "AI SEO Content"],
+                controllable_output: "Upload 30 Shorts/Reels (1/day). Publish 15 SEO Optimized Blog Posts.",
+                expected_result: "Traffic generation resulting in AdSense revenue & affiliate link clicks. Long-term brand equity.",
+                color: "var(--gold)"
+            },
+            {
+                id: "monthly_saas",
+                category: "Scalable Tech (MRR & Subscription)",
+                projects: ["Next.js Turbo Templates", "Premium Newsletter", "Micro SaaS"],
+                controllable_output: "Launch 1 minimal SaaS tool. Dispatch 4 weekly premium newsletters.",
+                expected_result: "Monthly Recurring Revenue (MRR). Uncapped scaling potential once product-market fit is achieved.",
+                color: "#3B82F6"
+            }
+        ];
+
         // TRACKING SYSTEM (Local Storage)
         let tracker = JSON.parse(localStorage.getItem('wealth_tracker')) || {
             projects: {}, // { project_id: { completedSteps: [], customSteps: [] } }
-            planner: {}  // { day: { completedTasks: [], customTasks: [], taskMeta: {}, dayNotes: '' } }
+            planner: {},  // { day: { completedTasks: [], customTasks: [], taskMeta: {}, dayNotes: '' } }
+            monthly: {}   // { category_id: { notes: '' } }
         };
 
         function saveTracker() {
             localStorage.setItem('wealth_tracker', JSON.stringify(tracker));
             renderRoadmap();
+            renderMonthly();
             renderSchedule();
             updateAnalytics();
         }
@@ -1008,8 +1089,49 @@
             }
         }
 
+        // MONTHLY RENDERING
+        function renderMonthly() {
+            const container = document.getElementById('monthly-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            monthlyData.forEach(m => {
+                const mState = tracker.monthly[m.id] || { notes: '' };
+                const projectsText = m.projects.join(' • ');
+
+                container.innerHTML += `
+                    <div class="card" style="border-left: 4px solid ${m.color}">
+                        <h3 style="color: ${m.color}">${m.category}</h3>
+                        <p style="font-size: 11px; margin-bottom: 20px; font-family: 'JetBrains Mono';">${projectsText}</p>
+                        
+                        <div class="info-box target">
+                            <strong><i data-lucide="crosshair" size="12" style="display:inline; margin-bottom:-2px"></i> Target Output (Actionable)</strong>
+                            ${m.controllable_output}
+                        </div>
+                        
+                        <div class="info-box reminder">
+                            <strong><i data-lucide="bell-ring" size="12" style="display:inline; margin-bottom:-2px"></i> Outcome Reminder</strong>
+                            ${m.expected_result}
+                        </div>
+
+                        <textarea class="day-notes-area" style="margin-top: auto;" placeholder="Review evaluasi & target konkrit bulan ini di sini..." 
+                                  onchange="saveMonthlyNotes('${m.id}', this.value)">${mState.notes}</textarea>
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function saveMonthlyNotes(id, text) {
+            if (!tracker.monthly) tracker.monthly = {};
+            if (!tracker.monthly[id]) tracker.monthly[id] = { notes: '' };
+            tracker.monthly[id].notes = text;
+            saveTracker();
+        }
+
         // GLOBAL INIT
         renderRoadmap();
+        renderMonthly();
         renderSchedule();
 
         // Prompt Hub Content
