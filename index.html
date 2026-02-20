@@ -2,14 +2,241 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Antigravity Lab | Trial & Error</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Lab - Trial & Error Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #0A0A0C;
+            --card-bg: #16161A;
+            --accent: #22C55E;
+            --text-main: #FFFFFF;
+            --text-dim: #88888E;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 80px 20px;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(to bottom, #FFF 0%, #666 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        p {
+            color: var(--text-dim);
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px 20px;
+        }
+
+        .experiment-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experiment-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(34, 197, 94, 0.1);
+        }
+
+        .card-num {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .card-desc {
+            color: var(--text-dim);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .add-new {
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            background: transparent;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .add-new:hover {
+            border-color: var(--text-dim);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .floating-glow {
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
+            filter: blur(60px);
+        }
+    </style>
 </head>
 
 <body>
-    <div id="root"></div>
-    <script type="module" src="./src/main.jsx"></script>
+    <div class="floating-glow"></div>
+
+    <header>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px;">
+            <i data-lucide="flask-conical" color="#22C55E"></i>
+            <span
+                style="font-weight: 700; color: var(--accent); letter-spacing: 2px; font-size: 14px; text-transform: uppercase;">Laboratory</span>
+        </div>
+        <h1>Trial & Error Lab</h1>
+        <p>Eksplorasi pembuatan Framer Dashboard Template. Setiap kartu di bawah adalah satu iterasi desain yang
+            berbeda.</p>
+    </header>
+
+    <div class="lab-grid">
+        <!-- Experiment 01 -->
+        <a href="experiments/01-original-match/index.html" class="experiment-card">
+            <span class="card-num">Exp #01</span>
+            <span class="badge">Completed</span>
+            <div class="card-title">Original Match</div>
+            <div class="card-desc">Rekonstruksi dashboard dari referensi gambar. Fokus pada akurasi layout dan radar
+                chart awal.</div>
+            <div class="card-footer">
+                View Experiment <i data-lucide="arrow-right" size="16"></i>
+            </div>
+        </a>
+
+        <!-- Experiment 05 -->
+        <a href="experiments/05-clinical-blueprint/index.html" class="experiment-card">
+            <span class="card-num">Exp #05</span>
+            <span class="badge" style="background: rgba(34, 197, 94, 0.1); color: var(--accent);">Successful UX</span>
+            <div class="card-title">Clinical Blueprint</div>
+            <div class="card-desc">Fokus pada mental health UX. Navigasi presisi & storytelling AIDA yang matang.</div>
+            <div class="card-footer">
+                View Blueprint <i data-lucide="arrow-right" size="16"></i>
+            </div>
+        </a>
+
+        <!-- Experiment 07 -->
+        <a href="experiments/07-governx-fintech/index.html" class="experiment-card">
+            <span class="card-num">Exp #07</span>
+            <span class="badge" style="background: rgba(34, 197, 94, 0.1); color: var(--accent);">High Performance
+                📈</span>
+            <div class="card-title">GovernX Dashboard</div>
+            <div class="card-desc">Fintech & Trading Dashboard. Simulasi Candlestick dan Bento Grid layout.</div>
+            <div class="card-footer">
+                View Dashboard <i data-lucide="arrow-right" size="16"></i>
+            </div>
+        </a>
+
+        <!-- Experiment 09 -->
+        <a href="experiments/09-pro-portfolio/index.html" class="experiment-card">
+            <span class="card-num">Exp #09</span>
+            <span class="badge" style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6;">Premium 💎</span>
+            <div class="card-title">Pro Motion Portfolio</div>
+            <div class="card-desc">Professional contributor-grade portfolio with persuasive conversion copy.</div>
+            <div class="card-footer" style="color: #8B5CF6;">
+                View Portfolio <i data-lucide="arrow-right" size="16"></i>
+            </div>
+        </a>
+
+        <!-- Experiment 11 -->
+        <a href="experiments/11-ai-wealth-roadmap/index.html" class="experiment-card" style="border-color: #FFA500;">
+            <span class="card-num" style="color: #FFA500;">Exp #11</span>
+            <span class="badge" style="background: rgba(255, 165, 0, 0.1); color: #FFA500;">Strategic Plan 🚀</span>
+            <div class="card-title">AI Wealth Roadmap</div>
+            <div class="card-desc">5-year masterplan to scale from $0 to $10K/month using AI-driven systems.</div>
+            <div class="card-footer" style="color: #FFA500;">
+                Read Masterplan <i data-lucide="arrow-right" size="16"></i>
+            </div>
+        </a>
+
+        <!-- Experiment 12 -->
+        <a href="experiments/12-ai-motion-orchestrator/index.html" class="experiment-card"
+            style="border-color: #3B82F6;">
+            <span class="card-num" style="color: #3B82F6;">Exp #12</span>
+            <span class="badge" style="background: rgba(59, 130, 246, 0.1); color: #3B82F6;">AI Execution 🧪</span>
+            <div class="card-title">AI Motion Orchestrator</div>
+            <div class="card-desc">Sistem interaksi AI Agent untuk update animasi teks secara real-time.</div>
+            <div class="card-footer" style="color: #3B82F6;">
+                Open Orchestrator <i data-lucide="arrow-right" size="16"></i>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
