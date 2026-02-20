@@ -215,7 +215,7 @@
             stroke-dasharray: 1000;
             stroke-dashoffset: 1000;
             opacity: 0;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+            /* Filter glow di-apply di group level via SVG fiter, bukan drop-shadow CSS lagi */
         }
 
         .draw-text.animate-stroke {
@@ -242,7 +242,6 @@
             100% {
                 fill: url(#goldGradient);
                 stroke-width: 0px;
-                filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
             }
         }
 
@@ -349,8 +348,23 @@ Day</textarea>
         </div>
 
         <div class="control-group">
-            <label>Animation Speed <span><span id="label-speed">150</span>ms / char</span></label>
-            <input type="range" id="val-speed" min="20" max="500" value="150" oninput="updatePreview('speed')">
+            <label>Outer Glow <span><span id="label-og-size">15</span>px | <span
+                        id="label-og-opacity">0.6</span></span></label>
+            <div style="display:flex; gap:10px;">
+                <input type="range" id="val-og-size" min="0" max="50" value="15" oninput="updateGlow()">
+                <input type="range" id="val-og-opacity" min="0" max="1" step="0.1" value="0.6" oninput="updateGlow()"
+                    style="width: 50%;">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label>Inner Glow <span><span id="label-ig-size">3</span>px | <span
+                        id="label-ig-opacity">0.5</span></span></label>
+            <div style="display:flex; gap:10px;">
+                <input type="range" id="val-ig-size" min="0" max="15" value="3" oninput="updateGlow()">
+                <input type="range" id="val-ig-opacity" min="0" max="1" step="0.1" value="0.5" oninput="updateGlow()"
+                    style="width: 50%;">
+            </div>
         </div>
 
         <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px;">
@@ -370,14 +384,41 @@ Day</textarea>
                 <svg viewBox="0 0 1920 1080" id="text-svg">
                     <defs>
                         <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#BF953F" />
-                            <stop offset="25%" stop-color="#FCF6BA" />
-                            <stop offset="50%" stop-color="#B38728" />
-                            <stop offset="75%" stop-color="#FBF5B7" />
-                            <stop offset="100%" stop-color="#AA771C" />
+                            <stop offset="0%" stop-color="#FFEAA7" />
+                            <stop offset="25%" stop-color="#D4AF37" />
+                            <stop offset="50%" stop-color="#996515" />
+                            <stop offset="75%" stop-color="#D4AF37" />
+                            <stop offset="100%" stop-color="#FFF3A1" />
                         </linearGradient>
+
+                        <filter id="premiumGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <!-- Outer Glow -->
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="15" result="blur1" id="fe-blur" />
+                            <feComponentTransfer in="blur1" result="blur2">
+                                <feFuncA type="linear" slope="0.6" id="fe-opacity" />
+                            </feComponentTransfer>
+                            <feFlood flood-color="#D4AF37" result="color" />
+                            <feComposite in="color" in2="blur2" operator="in" result="outerGlow" />
+
+                            <!-- Inner Glow (menggunakan efek highlight/brightening pada stroke/fill) -->
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="innerBlur" id="fe-inner-blur" />
+                            <feFlood flood-color="#FFFFFF" result="innerColor" />
+                            <feComposite in="innerColor" in2="innerBlur" operator="in" result="innerGlowUnmasked" />
+                            <!-- Mask dengan graphic asli supaya jadi inner -->
+                            <feComposite in="innerGlowUnmasked" in2="SourceAlpha" operator="in" result="innerGlow" />
+                            <feComponentTransfer in="innerGlow" result="innerGlowAdjusted">
+                                <feFuncA type="linear" slope="0.5" id="fe-inner-opacity" />
+                            </feComponentTransfer>
+
+                            <!-- Merge the glows and graphic -->
+                            <feMerge>
+                                <feMergeNode in="outerGlow" />
+                                <feMergeNode in="SourceGraphic" />
+                                <feMergeNode in="innerGlowAdjusted" />
+                            </feMerge>
+                        </filter>
                     </defs>
-                    <g id="svg-content-group">
+                    <g id="svg-content-group" filter="url(#premiumGlow)">
                         <!-- Text path elements will be injected here per letter -->
                     </g>
                 </svg>
@@ -519,6 +560,23 @@ Day</textarea>
             }
             // Rebuild
             updateSVGNodes();
+        }
+
+        function updateGlow() {
+            const ogSize = document.getElementById('val-og-size').value;
+            const ogOpacity = document.getElementById('val-og-opacity').value;
+            const igSize = document.getElementById('val-ig-size').value;
+            const igOpacity = document.getElementById('val-ig-opacity').value;
+
+            document.getElementById('label-og-size').innerText = ogSize;
+            document.getElementById('label-og-opacity').innerText = ogOpacity;
+            document.getElementById('label-ig-size').innerText = igSize;
+            document.getElementById('label-ig-opacity').innerText = igOpacity;
+
+            document.getElementById('fe-blur').setAttribute('stdDeviation', ogSize);
+            document.getElementById('fe-opacity').setAttribute('slope', ogOpacity);
+            document.getElementById('fe-inner-blur').setAttribute('stdDeviation', igSize);
+            document.getElementById('fe-inner-opacity').setAttribute('slope', igOpacity);
         }
 
         // Animation Execution
