@@ -34,11 +34,51 @@
             border-right: 1px solid var(--border);
             padding: 24px;
             background: var(--panel-bg);
-            z-index: 10;
+            z-index: 20;
             display: flex;
             flex-direction: column;
             gap: 20px;
             overflow-y: auto;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        /* Mobile Adjustments */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 50;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            body {
+                flex-direction: column;
+            }
+
+            aside {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                transform: translateX(-100%);
+            }
+
+            aside.open {
+                transform: translateX(0);
+            }
         }
 
         .control-group {
@@ -133,22 +173,31 @@
             justify-content: center;
             background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
             position: relative;
+            overflow: hidden;
+            /* Avoid scrollbars on main */
         }
 
         /* Resolution Frame for 4K */
+        #render-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         #render-frame {
             position: relative;
             background: transparent;
             width: 1920px;
-            /* Scale down preview dari 3840 untuk display */
             height: 1080px;
-            transform: scale(0.5);
-            /* Preview scale */
+            flex-shrink: 0;
+            /* transform diformulasikan via JS agar presisi sesuai layar */
             transform-origin: center center;
             display: flex;
-            background-color: transparent;
-            /* Untuk render transparan */
             border: 1px dashed rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            /* pastikan konten tidak keluar frame resolusi video */
         }
 
         svg {
@@ -251,11 +300,19 @@
 </head>
 
 <body>
+    <button class="mobile-toggle" onclick="document.querySelector('aside').classList.toggle('open')">
+        <i data-lucide="menu"></i>
+    </button>
+
     <!-- EDITOR PANEL -->
     <aside>
         <div style="font-weight: 800; color: var(--gold); display: flex; align-items: center; gap: 8px;">
             <i data-lucide="sliders"></i> SVG ENGINE CONTROLS
         </div>
+        <button onclick="document.querySelector('aside').classList.remove('open')" class="mobile-toggle"
+            style="position: static; box-shadow: none; margin-bottom: 20px;">
+            <i data-lucide="x"></i> Close Panel
+        </button>
 
         <div class="control-group">
             <label>Text Content</label>
@@ -308,21 +365,23 @@ Day</textarea>
 
     <!-- PREVIEW AREA -->
     <main>
-        <div id="render-frame">
-            <svg viewBox="0 0 1920 1080" id="text-svg">
-                <defs>
-                    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#BF953F" />
-                        <stop offset="25%" stop-color="#FCF6BA" />
-                        <stop offset="50%" stop-color="#B38728" />
-                        <stop offset="75%" stop-color="#FBF5B7" />
-                        <stop offset="100%" stop-color="#AA771C" />
-                    </linearGradient>
-                </defs>
-                <g id="svg-content-group">
-                    <!-- Text path elements will be injected here per letter -->
-                </g>
-            </svg>
+        <div id="render-container">
+            <div id="render-frame">
+                <svg viewBox="0 0 1920 1080" id="text-svg">
+                    <defs>
+                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#BF953F" />
+                            <stop offset="25%" stop-color="#FCF6BA" />
+                            <stop offset="50%" stop-color="#B38728" />
+                            <stop offset="75%" stop-color="#FBF5B7" />
+                            <stop offset="100%" stop-color="#AA771C" />
+                        </linearGradient>
+                    </defs>
+                    <g id="svg-content-group">
+                        <!-- Text path elements will be injected here per letter -->
+                    </g>
+                </svg>
+            </div>
         </div>
     </main>
 
@@ -338,6 +397,32 @@ Day</textarea>
 
     <script>
         lucide.createIcons();
+
+        // Responsive Frame Scaling
+        const container = document.getElementById('render-container');
+        const frame = document.getElementById('render-frame');
+
+        function scaleFrame() {
+            // Kita ingin memuat frame 1920x1080 ke dalam container yang tersedia
+            // dengan padding 40px
+            const padding = 40;
+            const targetWidth = container.clientWidth - (padding * 2);
+            const targetHeight = container.clientHeight - (padding * 2);
+
+            // Hitung rasio scale untuk lebar dan tinggi
+            const scaleX = targetWidth / 1920;
+            const scaleY = targetHeight / 1080;
+
+            // Ambil scale terkecil agar fit (letterbox)
+            const scale = Math.min(scaleX, scaleY);
+
+            // Terapkan scale minimal 0.1 agar tidak error
+            frame.style.transform = `scale(${Math.max(0.1, scale)})`;
+        }
+
+        // Pantau perubahan ukuran layar
+        new ResizeObserver(scaleFrame).observe(container);
+        window.addEventListener('resize', scaleFrame);
 
         // UI Control Updates
         function setAlign(align) {
