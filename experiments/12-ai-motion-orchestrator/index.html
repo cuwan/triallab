@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Motion Orchestrator | Exp #12</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #030303;
+            --card: #0A0A0A;
+            --accent: #3B82F6;
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #FFFFFF;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Control */
+        aside {
+            width: 350px;
+            border-right: 1px solid var(--border);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            background: #000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .instruction-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        textarea {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: #fff;
+            padding: 12px;
+            font-family: inherit;
+            resize: none;
+            height: 120px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        textarea:focus {
+            border-color: var(--accent);
+        }
+
+        button.send-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Preview Area */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+        }
+
+        #stage {
+            font-size: 80px;
+            font-weight: 800;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .log-box {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #444;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .status-active .status-dot {
+            background: #22C55E;
+            box-shadow: 0 0 10px #22C55E;
+        }
+
+        /* ANIMATION CLASSES (To be populated by AI) */
+        .ai-animate-glow {
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--accent);
+            }
+
+            to {
+                text-shadow: 0 0 40px var(--accent), 0 0 70px var(--accent);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside>
+        <div class="brand">
+            <i data-lucide="brain-circuit"></i>
+            AI ORCHESTRATOR
+        </div>
+
+        <div class="instruction-box">
+            <label style="font-size: 12px; font-weight: 600; color: #666;">PROMPT TO AGENT (ME)</label>
+            <textarea id="ai-prompt"
+                placeholder="Contoh: Buat teks jadi warna emas, bergetar pelan, dan font size 120px..."></textarea>
+            <button class="send-btn" onclick="sendToAI()">
+                <i data-lucide="send" size="16"></i>
+                SYNC TO LOCALSTORAGE
+            </button>
+        </div>
+
+        <div style="margin-top: auto; font-size: 11px; color: #444; line-height: 1.6;">
+            <strong>Cara Kerja:</strong><br>
+            1. Tulis instruksi di atas.<br>
+            2. Klik Sync. Sistem akan simpan di LocalStorage.<br>
+            3. Bilang ke Antigravity: "Update Exp 12 sesuai prompt di Storage."
+        </div>
+    </aside>
+
+    <main>
+        <div id="stage">ANTIGRAVITY</div>
+
+        <div class="log-box" id="status-bar">
+            <div class="status-active"><span class="status-dot"></span> System Ready. Waiting for AI Update...</div>
+            <div id="last-instruction" style="margin-top: 8px; color: var(--accent);">Last instruction: None</div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        function sendToAI() {
+            const prompt = document.getElementById('ai-prompt').value;
+            if (!prompt) return alert("Tulis sesuatu dulu!");
+
+            // Simpan ke LocalStorage
+            const data = {
+                instruction: prompt,
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            };
+
+            localStorage.setItem('ai_motion_task', JSON.stringify(data));
+
+            document.getElementById('last-instruction').innerText = `Last instruction: Sent to Storage (Pending AI)`;
+            document.getElementById('ai-prompt').value = '';
+
+            console.log("Task saved to LocalStorage. Waiting for Antigravity AI to read this...");
+            alert("Instruksi disimpan di LocalStorage!\n\nSekarang suruh saya (Antigravity) di chat: \n'Cek perintah di LocalStorage Exp #12 dan terapkan.'");
+        }
+
+        // Fitur untuk AI meng-update tampilan secara direct
+        window.applyAIUpdate = function (cssText, htmlText) {
+            if (cssText) {
+                const style = document.createElement('style');
+                style.textContent = cssText;
+                document.head.appendChild(style);
+            }
+            if (htmlText) {
+                document.getElementById('stage').innerHTML = htmlText;
+            }
+            document.getElementById('last-instruction').innerText = `Last status: AI Updated Successfully!`;
+        }
+    </script>
+</body>
+
+</html>

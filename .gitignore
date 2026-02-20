@@ -1,0 +1,13 @@
+node_modules
+dist
+.DS_Store
+*.local
+.vercel
+.git
+.agents
+.agent
+_agents
+_agent
+brain
+logs
+.antigravityignore
