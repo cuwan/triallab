@@ -186,6 +186,11 @@
             justify-content: center;
         }
 
+        .tab-btn.active {
+            background: #222 !important;
+            color: var(--gold) !important;
+        }
+
         #render-frame {
             position: relative;
             background: transparent;
@@ -305,25 +310,35 @@
 
     <!-- EDITOR PANEL -->
     <aside>
-        <div style="font-weight: 800; color: var(--gold); display: flex; align-items: center; gap: 8px;">
-            <i data-lucide="sliders"></i> SVG ENGINE CONTROLS
+        <div
+            style="font-weight: 800; color: var(--gold); display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="sliders"></i> MOTION V2
+            </div>
+            <button onclick="document.querySelector('aside').classList.remove('open')" class="mobile-toggle"
+                style="position: static; box-shadow: none; display: none;">
+                <i data-lucide="x"></i>
+            </button>
         </div>
-        <button onclick="document.querySelector('aside').classList.remove('open')" class="mobile-toggle"
-            style="position: static; box-shadow: none; margin-bottom: 20px;">
-            <i data-lucide="x"></i> Close Panel
-        </button>
 
-        <div class="control-group">
-            <label>Text Content</label>
-            <textarea id="val-text" oninput="updatePreview()">Happy
+        <!-- TABS NAV -->
+        <div class="tabs-nav"
+            style="display: flex; gap: 5px; background: #000; padding: 5px; border-radius: 8px; border: 1px solid var(--border);">
+            <button class="tab-btn active" onclick="switchTab('studio')"
+                style="flex:1; padding: 8px; background: transparent; border: none; color: #888; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; transition: 0.2s;">STUDIO</button>
+            <button class="tab-btn" onclick="switchTab('gemini')"
+                style="flex:1; padding: 8px; background: transparent; border: none; color: #888; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; transition: 0.2s;">GEMINI
+                3.1</button>
+        </div>
+
+        <!-- TAB: STUDIO -->
+        <div id="tab-studio" class="tab-content"
+            style="display: flex; flex-direction: column; gap: 20px; flex: 1; overflow-y: auto;">
+            <div class="control-group">
+                <label>Text Content</label>
+                <textarea id="val-text" oninput="updatePreview()">Happy
 Independent
 Day</textarea>
-        </div>
-
-        <div class="control-group">
-            <label>Alignment</label>
-            <div class="align-group">
-                <button class="align-btn" onclick="setAlign('start')"><i data-lucide="align-left"></i></button>
                 <button class="align-btn active" onclick="setAlign('middle')"><i
                         data-lucide="align-center"></i></button>
                 <button class="align-btn" onclick="setAlign('end')"><i data-lucide="align-right"></i></button>
@@ -375,6 +390,111 @@ Day</textarea>
                 <i data-lucide="download"></i> RENDER 4K SEQUENCE
             </button>
         </div>
+        </div> <!-- End of TAB STUDIO -->
+
+        <!-- TAB: GEMINI CAPABILITIES -->
+        <div id="tab-gemini" class="tab-content"
+            style="display: none; flex-direction: column; gap: 15px; flex: 1; overflow-y: auto;">
+
+            <div
+                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                <h3
+                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="bot" style="color: #A855F7;"></i> Deep Research Loop
+                </h3>
+                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
+                    Gemini 3.1 membaca struktur codebase yang kompleks. Bisa mencari pola bug di project besar (seperti
+                    menyusuri 10 folder sekaligus) untuk refactoring otomatis.
+                </p>
+                <div
+                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #A855F7;">
+                    <strong>Contoh:</strong> "Analisa file JS di folder src, ubah semua fetch() jadi axios()"
+                </div>
+            </div>
+
+            <div
+                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                <h3
+                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="terminal-square" style="color: #22C55E;"></i> Agentic Terminal Control
+                </h3>
+                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
+                    Kemampuan mengeksekusi bash script. Gemini bisa menginstal dependency (npm install), fix error
+                    console, bahkan melakukan deploy ke server secara autonomus.
+                </p>
+                <div
+                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #22C55E;">
+                    <strong>Contoh:</strong> "Bikin repo GitHub, push project ini, & setup Pages!"
+                </div>
+            </div>
+
+            <div
+                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                <h3
+                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="pen-tool" style="color: var(--gold);"></i> Vector Math & SVG Matrix
+                </h3>
+                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
+                    Gemini dapat menghitung koordinat Bounding-Box SVG, Matrix rotasi, dan SVG Filters setara After
+                    Effects untuk membuat engine SVG generator otomatis (seperti yg kamu lihat di tab Studio!).
+                </p>
+                <div
+                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid var(--gold);">
+                    <strong>Contoh:</strong> "Buatkan script JS untuk ubah SVG ini beranimasi stroke by stroke."
+                </div>
+            </div>
+
+            <div
+                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                <h3
+                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="image" style="color: #3B82F6;"></i> Visual Tool & Generasi
+                </h3>
+                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
+                    Berbekal default_api_generate_image, Agent dapat merancang interface UX, mockup dashboard, atau
+                    asset visual 2D di tengah proses coding.
+                </p>
+                <div
+                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #3B82F6;">
+                    <strong>Contoh:</strong> "Generate mockup dashboard financial warna dark-purple."
+                </div>
+            </div>
+
+            <div
+                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                <h3
+                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="network" style="color: #F59E0B;"></i> API Orchestration
+                </h3>
+                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
+                    Memahami kompleksitas REST, GraphQL, dan gRPC. Dapat menulis proxy backend (edge functions),
+                    menyusun integrasi database, & manage OAuth flow.
+                </p>
+                <div
+                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #F59E0B;">
+                    <strong>Contoh:</strong> "Bikin endpoint API untuk narik data user dari Supabase table 'xyz'."
+                </div>
+            </div>
+
+            <div
+                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                <h3
+                    style="margin: 0 0 10px 0; color: #FFF; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="shield-alert" style="color: #EF4444;"></i> Self-Healing Code
+                </h3>
+                <p style="font-size: 12px; color: #AAA; line-height: 1.5; margin: 0;">
+                    Ketika script error di terminal atau browser, Gemini 3.1 Pro mampu membaca error log tersebut,
+                    mencari penyebab aslinya, dan menulis patch / kode perbaikan *(seperti yang tadi dilakukan pada
+                    error GitHub Pages 404)*.
+                </p>
+                <div
+                    style="margin-top: 10px; font-size: 11px; color: #888; background: #000; padding: 8px; border-radius: 4px; border-left: 2px solid #EF4444;">
+                    <strong>Contoh:</strong> "Tadi npm run build failed, ini lognya. Tolong fix package.json-nya."
+                </div>
+            </div>
+
+        </div> <!-- End of TAB GEMINI -->
+
     </aside>
 
     <!-- PREVIEW AREA -->
@@ -438,6 +558,18 @@ Day</textarea>
 
     <script>
         lucide.createIcons();
+
+        // Tabs Logic
+        function switchTab(tabId) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Switch content
+            document.getElementById('tab-studio').style.display = 'none';
+            document.getElementById('tab-gemini').style.display = 'none';
+            document.getElementById(`tab-${tabId}`).style.display = 'flex';
+        }
 
         // Responsive Frame Scaling
         const container = document.getElementById('render-container');
